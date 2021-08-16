@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import type {FormEvent} from "react";
 
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function login(e: any) {
+  async function login(e: FormEvent) {
     e.preventDefault();
 
     try {

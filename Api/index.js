@@ -5,6 +5,8 @@ dotenv.config();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
+const authRoute = require("./routes/authRoute");
+
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -18,6 +20,9 @@ app.use(
     credentials: true
   })
 );
+
+
+app.use(authRoute);
 
 
 

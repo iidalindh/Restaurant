@@ -26,7 +26,7 @@ app.listen(PORT, () => {
 });
 
 mongoose.connect(
-  "mongodb+srv://hammarby:Bojanic6@restaurant.sv3mj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  process.env.DB_CONNECT,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

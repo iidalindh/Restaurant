@@ -40,8 +40,40 @@ const registerSubmit = async (req, res) => {
     }
 }
 
+const loginSubmit = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+
+        if(!email || !password) {
+            return res.status(400).json({message:'Fyll i alla fälten'});
+        }
+
+        const existingUser = await User.findOne({email: email});
+    
+        if (!existingUser) {
+            return res.status(400).json({message: 'Inget konto med mailadressen hittades'});
+        }
+
+        console.log(existingUser);
+
+        bcrypt.compare(password, existingUser.passwordHash, function (err,result) {
+            if(err) {
+                console.error(err);
+            } else {
+                console.log(result);
+            }
+        })
+
+
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 
 module.exports = {
-    registerSubmit
+    registerSubmit,
+    loginSubmit,
 
 }

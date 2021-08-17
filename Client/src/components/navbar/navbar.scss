@@ -1,0 +1,155 @@
+.navbar {
+    width: 100%;
+    height: 100px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(238, 238, 238);
+    padding: 0 20px;
+    @media screen and (max-width: 960px) {
+        position: relative;
+        padding: 0;
+    }
+
+    .nav-logo {
+        width: 15%;
+        color: #fff;
+        justify-self: start;
+        margin: 30px 0 30px 40px;
+        cursor: pointer;
+        @media screen and (max-width: 960px) {
+            width: 45%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 0;
+        }
+        @media screen and (max-width: 400px) {
+            width: 60%;
+        }
+    }
+
+    .menu-icon {
+        display: none;
+        @media screen and (max-width: 960px) {
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .fa-bars {
+            color: rgb(14, 14, 14);
+            font-size: 1.5rem;
+        }
+
+        .fa-times {
+            @media screen and (max-width: 960px) {
+                color: rgb(14, 14, 14);
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    .nav-menu {
+        display: grid;
+        grid-template-columns: repeat(6, auto);
+        grid-gap: 25px;
+        list-style: none;
+        text-align: center;
+        width: 70%;
+        justify-content: end;
+        margin-right: 2rem;
+        @media screen and (max-width: 960px) {
+            width: 100%;
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100px;
+            left: -100%;
+            transition: all 0.4s ease;
+        }
+
+        .nav-links {
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            text-shadow: 0 0 7px rgb(216, 216, 216);
+            border-bottom: 2px solid transparent;
+            @media screen and (max-width: 960px) {
+                width: 100%;
+                text-shadow: none;
+                padding: 20px;
+                display: table;
+            }
+
+            &:hover {
+                color: #bb2c31;
+                text-shadow: none;
+                border-bottom: 2px solid #E0393E;
+                transition: all 0.2s ease-out;
+            }
+        }
+
+        .nav-links.active {
+            color: #bb2c31;
+            text-shadow: none;
+            border-bottom: 2px solid #E0393E;
+        }
+
+        .logoutBtn {
+            background-color: black;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 10px;
+            font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            font-size: 0.8rem;
+            border-bottom: 2px solid transparent;
+            padding: 3px 6px 1px 6px;
+            cursor: pointer;
+            @media screen and (max-width: 960px) {
+                width: 100%;
+                text-align: center;
+                padding: 20px;
+                display: table;
+            }
+        }
+    }
+
+    .nav-menu.active {
+        @media screen and (max-width: 960px) {
+            min-height: 100vh; 
+            background-color: rgb(206, 206, 206);
+            left: 0;
+            transition: all 0.4s ease;
+            z-index: 10;
+        }
+    }
+}
+
+.nav-links-mobile {
+    display: none;
+    @media screen and (max-width: 960px) {
+        display: block;
+        text-align: center;
+        padding: 1.2rem;
+        margin: 2rem auto;
+        border-radius: 4px;
+        width: 75%;
+        background: yellow;
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.5rem;
+
+        &:hover {
+            background: #fff;
+            color: pink;
+            transition: 250ms;
+        }
+    }
+}

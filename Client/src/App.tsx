@@ -19,6 +19,9 @@ function App() {
         <Route path="/register">
           <Register />
         </Route>
+        <Route path="/admin">
+          //Här visar du komponenten som ska visas på den routen
+        </Route>
       </Switch>
     </Router>
   );

@@ -9,7 +9,7 @@ export const Register = () => {
     const [passwordVerify, setPasswordVerify] = useState("");
 
     async function register(e : FormEvent) {
-
+        e.preventDefault();
 
         try {
             const registerData = {
@@ -18,8 +18,9 @@ export const Register = () => {
                 passwordVerify
             };
 
-            await axios.post("http://localhost:8000/register", registerData);
-            
+            const response = await axios.post("http://localhost:8000/register", registerData);
+            console.log(response);
+             
         } catch (err) {
            console.log(err); 
         }

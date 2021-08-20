@@ -3,8 +3,11 @@ import { Navbar } from '../navbar/Navbar';
 
 export const LandingPage = () => {
     return (
-        <div>
+        <>
             <Navbar/>
-        </div>
+            <div>
+                LandingPage
+            </div>
+        </>
     )
 }

@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const registerSubmit = async (req, res) => {
     
@@ -33,10 +34,19 @@ const registerSubmit = async (req, res) => {
         });
 
         const savedUser = await newUser.save();
-        console.log(savedUser);
+
+        //! Log the user in
+        const token = await jwt.sign({
+            user: savedUser._id,
+        }, process.env.PRIVATE_KEY);
+      
+        console.log(token);
+      
+        res.cookie("token", token, { httpOnly: true }).send();
 
     } catch (error) {
         console.error(error);
+        res.status(500).send();
     }
 }
 
@@ -69,9 +79,33 @@ const loginSubmit = async (req, res) => {
     }
 }
 
+const getLoggedInUser = async (req, res) => {
+     try {
+          const token = req.cookies.token;
+          if (!token) {
+            return res.json({loggedIn: false, role: ""});
+          }
+          const userId = jwt.verify(token, process.env.PRIVATE_KEY);
+      
+          const user = await User.findById(userId.user);
+          console.log(user);
+      
+          if(user.role === "admin") {
+            console.log("användaren är admin")
+            return res.json({loggedIn: true, role: `${user.role}`})
+          } else {
+            res.send({loggedIn: true, role: `${user.role}`});
+        }
+          
+      } catch (err) {
+          console.error(err);
+          res.json({loggedIn: false});
+        }
+}
+
 
 module.exports = {
     registerSubmit,
     loginSubmit,
-
+    getLoggedInUser
 }

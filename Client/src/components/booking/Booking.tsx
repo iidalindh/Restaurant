@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
-// import styled from 'styled-components';
 
-// const Button = styled.button`
-//     color: blue;
-// `
 
 export const Booking = () => {
   const [dateValue, setDateValue] = useState(new Date());

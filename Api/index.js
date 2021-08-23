@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 const authRoute = require("./routes/authRoute");
+const bookingRoute = require("./routes/bookingRoute");
 
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(
 
 
 app.use(authRoute);
+app.use(bookingRoute);
 
 
 

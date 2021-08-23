@@ -15,16 +15,19 @@ export const Booking = () => {
     setDateValue(e);
   }
 
-  function onSubmit() {
+  async function onSubmit(e : any) {
+      e.preventDefault();
     const dataToSend = {
-        date: dateValue,
+        date: dateValue.toLocaleDateString(),
         time: 18,
         numberOfGuests: 4,
         customerName: "Ida",
         customerEmail: "bajs@email.com"
     }
 
-    axios.post('http://localhost:8000/')
+    const res = await axios.post('http://localhost:8000/booking', dataToSend);
+    console.log(res);
+    
   }
 
   
@@ -40,7 +43,8 @@ export const Booking = () => {
         >
           Logga
         </button>
-        <Button>Hej</Button>
+        <button type="submit">skicka skiten nu</button>
+       
       </form>
     </div>
   );

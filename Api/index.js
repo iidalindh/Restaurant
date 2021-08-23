@@ -7,7 +7,6 @@ const cors = require("cors");
 
 const authRoute = require("./routes/authRoute");
 const bookingRoute = require("./routes/bookingRoute");
-const Booking = require("./models/Booking");
 
 const app = express();
 const PORT = process.env.PORT || 8080;

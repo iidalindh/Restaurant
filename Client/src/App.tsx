@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Login } from "./components/login/Login";
 import { Register } from "./components/register/Register";
 import { LandingPage } from "./components/landingPage/LandingPage";
+import { Booking } from "./components/booking/Booking";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route path="/register">
           <Register />
+        </Route>
+        <Route path="/booking">
+          <Booking />
         </Route>
         <Route path="/admin">
           //Här visar du komponenten som ska visas på den routen

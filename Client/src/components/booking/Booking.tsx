@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import axios from 'axios';
-import styled from 'styled-components';
+import axios from "axios";
+// import styled from 'styled-components';
 
-const Button = styled.button`
-    color: blue;
-`
+// const Button = styled.button`
+//     color: blue;
+// `
 
 export const Booking = () => {
   const [dateValue, setDateValue] = useState(new Date());
@@ -17,17 +17,15 @@ export const Booking = () => {
 
   function onSubmit() {
     const dataToSend = {
-        date: dateValue,
-        time: 18,
-        numberOfGuests: 4,
-        customerName: "Ida",
-        customerEmail: "bajs@email.com"
-    }
+      date: dateValue,
+      time: 18,
+      numberOfGuests: 4,
+      customerName: "Ida",
+      customerEmail: "bajs@email.com",
+    };
 
-    axios.post('http://localhost:8000/')
+    axios.post("http://localhost:8000/booking", dataToSend);
   }
-
-  
 
   return (
     <div>
@@ -40,7 +38,8 @@ export const Booking = () => {
         >
           Logga
         </button>
-        <Button>Hej</Button>
+        <button type="submit">Skicka rååååå</button>
+        {/* <Button>Hej</Button> */}
       </form>
     </div>
   );

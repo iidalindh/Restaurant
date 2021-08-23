@@ -74,6 +74,17 @@ const loginSubmit = async (req, res) => {
             }
         })
 
+        if (!passwordCorrect) {
+            return res.status(401).json({ errorMessage: "Wrong email or password" });
+          }
+      
+          const token = await jwt.sign(
+            {
+              user: existingUser._id,
+            },
+            process.env.PRIVATE_KEY
+          );
+
     } catch (error) {
         console.error(error);
     }

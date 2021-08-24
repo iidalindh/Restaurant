@@ -1,47 +1,66 @@
 import React, { useState } from "react";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
-// import styled from 'styled-components';
+import { BookingGuests } from "./BookingGuests";
+import { BookingCalendar } from "./BookingCalendar";
+import { BookingTime } from "./BookingTime";
+import { BookingDetails } from "./BookingDetails";
 
-// const Button = styled.button`
-//     color: blue;
-// `
+export interface IBooking {
+  numberOfGuests: number;
+  date: string;
+  time: number;
+  customerName: string;
+  customerEmail: string;
+}
 
-export const Booking = () => {
-  const [dateValue, setDateValue] = useState(new Date());
+//Skapa funktion för att uppdater state (guests, time, date osv.)
 
-  function changeDate(e: any) {
-    setDateValue(e);
-  }
+export const Booking = (props: IBooking) => {
+  let defaultValue: IBooking = {
+    numberOfGuests: 0,
+    date: "2018-02-12",
+    time: 18,
+    customerName: "",
+    customerEmail: "",
+  };
+
+  const [bookingValue, setBookingValue] = useState(defaultValue);
 
   async function onSubmit(e: any) {
     e.preventDefault();
-    const dataToSend = {
-      date: dateValue.toLocaleDateString(),
-      time: 18,
-      numberOfGuests: 4,
-      customerName: "Ida",
-      customerEmail: "bajs@email.com",
-    };
 
-    const res = await axios.post("http://localhost:8000/booking", dataToSend);
-    console.log(res);
+    // const dataToSend: IBookingProps = {
+    //   booking: {
+    //     numberOfGuests: 8,
+    //     date: Date.now,
+    //     time: 0,
+    //     customerName: "Ida",
+    //     customerEmail: "ida@gmail.com",
+    //   },
+    // };
+
+    // console.log(dataToSend);
   }
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <Calendar onChange={changeDate} value={dateValue} />
-        <button
-          onClick={() => {
-            console.log(dateValue.toLocaleDateString());
-          }}
-        >
-          Logga
-        </button>
-        <button type="submit">skicka skiten nu</button>
-      </form>
-    </div>
+    <>
+      <div>
+        <form onSubmit={onSubmit}>
+          <BookingGuests
+            numberOfGuests={bookingValue.numberOfGuests}
+          ></BookingGuests>
+          <BookingCalendar date={bookingValue.date}></BookingCalendar>
+          <BookingTime time={bookingValue.time}></BookingTime>
+          <BookingDetails
+            date={bookingValue.date}
+            time={bookingValue.time}
+            numberOfGuests={bookingValue.numberOfGuests}
+            customerEmail={bookingValue.customerEmail}
+            customerName={bookingValue.customerName}
+          ></BookingDetails>
+        </form>
+      </div>
+    </>
   );
 };

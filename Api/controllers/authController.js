@@ -66,24 +66,23 @@ const loginSubmit = async (req, res) => {
 
         console.log(existingUser);
 
-       const passwordCorrect = bcrypt.compare(password, existingUser.passwordHash, function (err,result) {
-            if(err) {
-                console.error(err);
-            } else {
-                console.log(result);
-            }
-        })
+        const passwordCorrect = bcrypt.compare(password, existingUser.passwordHash);
 
         if (!passwordCorrect) {
             return res.status(401).json({ errorMessage: "Wrong email or password" });
           }
       
+          if(passwordCorrect) {
+              console.log('password match');
+          }
           const token = await jwt.sign(
             {
               user: existingUser._id,
             },
             process.env.PRIVATE_KEY
           );
+
+          res.cookie("token", token, { httpOnly: true }).send();
 
     } catch (error) {
         console.error(error);

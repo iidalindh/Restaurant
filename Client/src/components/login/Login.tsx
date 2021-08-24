@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import type {FormEvent} from "react";
-import styled from "styled-components";
-
-const Button = styled.button`
-  color: black;
-  background: green;
-`;
 
 
 
@@ -30,7 +24,6 @@ export const Login = () => {
   }
   return (
     <div className="login-container">
-      <Button>klicka</Button>
       <h1>Logga in</h1>
       <form onSubmit={login}>
         <input

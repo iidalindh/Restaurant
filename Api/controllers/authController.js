@@ -69,7 +69,7 @@ const loginSubmit = async (req, res) => {
         const passwordCorrect = bcrypt.compare(password, existingUser.passwordHash);
 
         if (!passwordCorrect) {
-            return res.status(401).json({ errorMessage: "Wrong email or password" });
+            return res.status(401).json({ message: "Wrong email or password" });
           }
       
           if(passwordCorrect) {

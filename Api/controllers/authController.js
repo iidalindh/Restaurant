@@ -66,7 +66,7 @@ const loginSubmit = async (req, res) => {
 
         console.log(existingUser);
 
-        bcrypt.compare(password, existingUser.passwordHash, function (err,result) {
+       const passwordCorrect = bcrypt.compare(password, existingUser.passwordHash, function (err,result) {
             if(err) {
                 console.error(err);
             } else {

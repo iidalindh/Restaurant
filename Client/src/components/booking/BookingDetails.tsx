@@ -23,20 +23,18 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 
-  const customerData = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email
-  }
+  
 
-  function inputOnChange(e : any) {
-    setFirstName(e.target.value);
-    setLastName(e.target.value);
-    setEmail(e.target.value);
-
-  }
 
   function formSubmit(e : any) {
+
+    const customerData = {
+          firstName: firstName,
+          lastName: lastName,
+          email: email
+       }
+    console.log(customerData);
+    
     e.preventDefault();
     console.log(e);
     
@@ -44,7 +42,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
     props.formChange(customerData);
   } 
 
-
+   
   return (
     <>
       <section className="booking-section">
@@ -67,9 +65,9 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
         <div className="contact-info">
           <h1>KONTAKTUPPGIFTER</h1>
           <form onSubmit={formSubmit}>
-            <input type="text" placeholder="FÖRNAMN" id="firstName"  onChange={inputOnChange}/>
-            <input type="text" placeholder="EFTERNAMN" id="lastName" onChange={inputOnChange}/>
-            <input type="text" placeholder="MEJLADRESS" id="email" onChange={inputOnChange} />
+            <input type="text" placeholder="FÖRNAMN" id="firstName"  onChange={(e) => {setFirstName(e.target.value)}}/>
+            <input type="text" placeholder="EFTERNAMN" id="lastName" onChange={(e) => {setLastName(e.target.value)}}/>
+            <input type="text" placeholder="MEJLADRESS" id="email" onChange={(e) => {setEmail(e.target.value)}} />
             <button type="submit">BOKA NU</button>
           </form>
         </div>

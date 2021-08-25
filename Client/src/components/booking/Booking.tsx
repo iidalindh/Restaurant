@@ -35,7 +35,7 @@ export const Booking = (props: any) => {
   const [time, setTime] = useState(0);
   const [date, setDate] = useState("");
   const [guests, setGuests] = useState(0);
-  const [details, setDetails] = useState({});
+  const [details, setDetails] = useState({customerName: "", customerEmail: "",});
 
   function updateTime(bookingTime : number) {
     setTime(bookingTime)
@@ -58,31 +58,32 @@ export const Booking = (props: any) => {
     let name : string = bookingDetails.firstName + " " + bookingDetails.lastName;
     let email : string = bookingDetails.email;
 
-    const customerDetails = {
+    let customerDetails = {
       customerName: name,
       customerEmail: email
     }
     setDetails(customerDetails);
-    console.log(details);
-    
   }
 
-  async function onSubmit(e: any) {
+  function onSubmit(e: any) {
     e.preventDefault();
 
-    // const dataToSend: IBookingProps = {
-    //   booking: {
-    //     numberOfGuests: 8,
-    //     date: Date.now,
-    //     time: 0,
-    //     customerName: "Ida",
-    //     customerEmail: "ida@gmail.com",
-    //   },
-    // };
+    const dataToSend: IBooking = {
+     numberOfGuests: guests,
+     date: date,
+     time: time,
+     customerName: details.customerName,
+     customerEmail: details.customerEmail
+    };
 
-    // console.log(dataToSend);
+    setBookingValue(dataToSend);
+
+    
   }
-
+    // console.log(customerDetails)
+    // console.log(details);
+    // console.log(bookingValue);
+   
   return (
     <>
       <Navbar/>
@@ -101,7 +102,7 @@ export const Booking = (props: any) => {
             customerName={bookingValue.customerName}
             formChange={customerDetails}
           ></BookingDetails>
-       
+       <button type="button" onClick={onSubmit}>Logga all data</button>
       </div>
     </>
   );

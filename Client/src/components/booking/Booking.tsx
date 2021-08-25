@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
@@ -5,6 +6,7 @@ import { BookingGuests } from "./BookingGuests";
 import { BookingCalendar } from "./BookingCalendar";
 import { BookingTime } from "./BookingTime";
 import { BookingDetails } from "./BookingDetails";
+import { Navbar } from '../navbar/Navbar';
 
 export interface IBooking {
   numberOfGuests: number;
@@ -12,6 +14,7 @@ export interface IBooking {
   time: number;
   customerName: string;
   customerEmail: string;
+
 }
 
 //Skapa funktion för att uppdater state (guests, time, date osv.)
@@ -45,6 +48,7 @@ export const Booking = (props: IBooking) => {
 
   return (
     <>
+      <Navbar/>
       <div>
         <form onSubmit={onSubmit}>
           <BookingGuests

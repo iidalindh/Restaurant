@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import type {FormEvent} from "react";
+import { Navbar } from "../navbar/Navbar";
+
 
 
 export const Login = () => {
@@ -22,6 +24,8 @@ export const Login = () => {
     }
   }
   return (
+    <>
+    <Navbar />
     <div className="login-container">
       <h1>Logga in</h1>
       <form onSubmit={login}>
@@ -41,5 +45,6 @@ export const Login = () => {
         <button type="submit">Logga in</button>
       </form>
     </div>
+    </>
   );
 };

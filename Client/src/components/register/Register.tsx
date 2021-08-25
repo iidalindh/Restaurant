@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import type {FormEvent} from "react";
+import { Navbar } from '../navbar/Navbar';
 
 export const Register = () => {
 
@@ -27,6 +28,8 @@ export const Register = () => {
 
     }
     return (
+        <>
+        <Navbar />
         <div className="register-container">
             <h1>Registrera ett nytt konto</h1>
             <form onSubmit={register}>
@@ -37,5 +40,6 @@ export const Register = () => {
             </form> 
             
         </div>
+        </>
     )
 }

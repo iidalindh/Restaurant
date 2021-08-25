@@ -1,8 +1,11 @@
+
 import React from "react";
 import "./landingpage.scss";
+import { Navbar } from '../navbar/Navbar';
 export const LandingPage = () => {
   return (
     <>
+      <Navbar />
       <section className="frontpage">
         <h1>SÖDERMALM</h1>
         <button>BOKA NU</button>
@@ -22,3 +25,5 @@ export const LandingPage = () => {
     </>
   );
 };
+
+

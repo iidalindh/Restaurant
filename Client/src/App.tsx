@@ -21,17 +21,15 @@ function App() {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/booking">
-          <Booking />
-        </Route>
+        <Route path="/booking">{/* <Booking /> */}</Route>
         <Route path="/booking-details">
-          <BookingDetails
+          {/* <BookingDetails
             date={bookingValue.date}
             time={bookingValue.time}
             numberOfGuests={bookingValue.numberOfGuests}
             customerEmail={bookingValue.customerEmail}
             customerName={bookingValue.customerName}
-          />
+          /> */}
         </Route>
         <Route path="/admin">
           //Här visar du komponenten som ska visas på den routen

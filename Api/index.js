@@ -6,25 +6,23 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 const authRoute = require("./routes/authRoute");
-
+const bookingRoute = require("./routes/bookingRoute");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-mongoose.set('useFindAndModify', false);
+mongoose.set("useFindAndModify", false);
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
     origin: ["http://localhost:3000"],
-    credentials: true
+    credentials: true,
   })
 );
 
-
 app.use(authRoute);
-
-
+app.use(bookingRoute);
 
 app.listen(PORT, () => {
   console.log(`server running on port: ${PORT}`);

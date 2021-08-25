@@ -1,0 +1,62 @@
+.frontpage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+
+  h1 {
+    font-size: 2.5em;
+    font-weight: 300;
+  }
+}
+
+.img-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 80%;
+    height: 80%;
+    padding-bottom: 2rem;
+  }
+}
+
+button {
+  width: 50%;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #213fea;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1.5em;
+}
+
+.view-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: beige;
+  img {
+    padding: 2rem;
+    width: 80%;
+  }
+
+  .gotomenu {
+    padding: 0% 10%;
+
+    button {
+      margin-bottom: 10%;
+    }
+  }
+
+  h2 {
+    font-size: 1.8em;
+    font-weight: 400;
+  }
+}

@@ -1,43 +1,109 @@
+
 import React, { useState } from "react";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
+import { BookingGuests } from "./BookingGuests";
+import { BookingCalendar } from "./BookingCalendar";
+import { BookingTime } from "./BookingTime";
+import { BookingDetails } from "./BookingDetails";
+import { Navbar } from '../navbar/Navbar';
+
+export interface IBooking {
+  numberOfGuests: number;
+  date: string;
+  time: number;
+  customerName: string;
+  customerEmail: string;
+
+}
 
 
-export const Booking = () => {
-  const [dateValue, setDateValue] = useState(new Date());
 
-  function changeDate(e: any) {
-    setDateValue(e);
+//Skapa funktion för att uppdater state (guests, time, date osv.)
+
+export const Booking = (props: any) => {
+  let defaultValue: IBooking = {
+    numberOfGuests: 0,
+    date: "2018-02-12",
+    time: 18,
+    customerName: "",
+    customerEmail: "",
+  };
+
+  const [bookingValue, setBookingValue] = useState(defaultValue);
+
+  const [time, setTime] = useState(0);
+  const [date, setDate] = useState("");
+  const [guests, setGuests] = useState(0);
+  const [details, setDetails] = useState({customerName: "", customerEmail: "",});
+
+  function updateTime(bookingTime : number) {
+    setTime(bookingTime)
+    console.log('Körs');
+    console.log(bookingTime);
   }
 
-  async function onSubmit(e: any) {
+  function datePicker(bookingDate : string) {
+    setDate(bookingDate);
+    console.log(bookingDate);
+  }
+
+  
+  function selectNumberGuests(bookingGuests : number){
+    setGuests(bookingGuests);
+    console.log("antal gäster" + bookingGuests);
+  }
+
+  function customerDetails(bookingDetails: any) {
+    let name : string = bookingDetails.firstName + " " + bookingDetails.lastName;
+    let email : string = bookingDetails.email;
+
+    let customerDetails = {
+      customerName: name,
+      customerEmail: email
+    }
+    setDetails(customerDetails);
+  }
+
+  function onSubmit(e: any) {
     e.preventDefault();
-    const dataToSend = {
-      date: dateValue.toLocaleDateString(),
-      time: 18,
-      numberOfGuests: 4,
-      customerName: "Ida",
-      customerEmail: "bajs@email.com",
+
+    const dataToSend: IBooking = {
+     numberOfGuests: guests,
+     date: date,
+     time: time,
+     customerName: details.customerName,
+     customerEmail: details.customerEmail
     };
 
-    const res = await axios.post("http://localhost:8000/booking", dataToSend);
-    console.log(res);
-  }
+    setBookingValue(dataToSend);
 
+    
+  }
+    // console.log(customerDetails)
+    // console.log(details);
+    // console.log(bookingValue);
+   
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <Calendar onChange={changeDate} value={dateValue} />
-        <button
-          onClick={() => {
-            console.log(dateValue.toLocaleDateString());
-          }}
-        >
-          Logga
-        </button>
-        <button type="submit">skicka skiten nu</button>
-      </form>
-    </div>
+    <>
+      <Navbar/>
+      <div>
+        
+          <BookingGuests
+            numberOfGuests={bookingValue.numberOfGuests} pickGuestAmount={selectNumberGuests}
+          ></BookingGuests>
+          <BookingCalendar date={bookingValue.date} pickDate={datePicker}></BookingCalendar>
+          <BookingTime time={bookingValue.time} addTime={updateTime}></BookingTime>
+          <BookingDetails
+            date={bookingValue.date}
+            time={bookingValue.time}
+            numberOfGuests={bookingValue.numberOfGuests}
+            customerEmail={bookingValue.customerEmail}
+            customerName={bookingValue.customerName}
+            formChange={customerDetails}
+          ></BookingDetails>
+       <button type="button" onClick={onSubmit}>Logga all data</button>
+      </div>
+    </>
   );
 };

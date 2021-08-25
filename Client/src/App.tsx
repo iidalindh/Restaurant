@@ -44,7 +44,7 @@ function App() {
           <Register />
         </Route>
 
-        <Route path="/booking">{/* <Booking /> */}</Route>
+        <Route path="/booking"><Booking /></Route>
         <Route path="/booking-details">
           {/* <BookingDetails
             date={bookingValue.date}

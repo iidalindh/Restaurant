@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { IBooking } from "./Booking";
 import "./booking.scss";
+import type {FormEvent} from "react";
 
 interface IBookingDetailsProps {
   date: string;
@@ -8,12 +9,41 @@ interface IBookingDetailsProps {
   numberOfGuests: number;
   customerName: string;
   customerEmail: string;
+  formChange(details : object): void;
   //Skapa funktion för att uppdatera state
 }
+
+
 
 export const BookingDetails = (props: IBookingDetailsProps) => {
   // const res = await axios.post("http://localhost:8000/booking", dataToSend);
   // console.log(res);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const customerData = {
+    firstName: firstName,
+    lastName: lastName,
+    email: email
+  }
+
+  function inputOnChange(e : any) {
+    setFirstName(e.target.value);
+    setLastName(e.target.value);
+    setEmail(e.target.value);
+
+  }
+
+  function formSubmit(e : any) {
+    e.preventDefault();
+    console.log(e);
+    
+   
+    props.formChange(customerData);
+  } 
+
 
   return (
     <>
@@ -36,10 +66,10 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
         <hr />
         <div className="contact-info">
           <h1>KONTAKTUPPGIFTER</h1>
-          <form>
-            <input type="text" placeholder="FÖRNAMN" />
-            <input type="text" placeholder="EFTERNAMN" />
-            <input type="text" placeholder="MEJLADRESS" />
+          <form onSubmit={formSubmit}>
+            <input type="text" placeholder="FÖRNAMN" id="firstName"  onChange={inputOnChange}/>
+            <input type="text" placeholder="EFTERNAMN" id="lastName" onChange={inputOnChange}/>
+            <input type="text" placeholder="MEJLADRESS" id="email" onChange={inputOnChange} />
             <button type="submit">BOKA NU</button>
           </form>
         </div>

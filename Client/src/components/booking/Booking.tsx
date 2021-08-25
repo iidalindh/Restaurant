@@ -17,9 +17,11 @@ export interface IBooking {
 
 }
 
+
+
 //Skapa funktion för att uppdater state (guests, time, date osv.)
 
-export const Booking = (props: IBooking) => {
+export const Booking = (props: any) => {
   let defaultValue: IBooking = {
     numberOfGuests: 0,
     date: "2018-02-12",
@@ -29,6 +31,41 @@ export const Booking = (props: IBooking) => {
   };
 
   const [bookingValue, setBookingValue] = useState(defaultValue);
+
+  const [time, setTime] = useState(0);
+  const [date, setDate] = useState("");
+  const [guests, setGuests] = useState(0);
+  const [details, setDetails] = useState({});
+
+  function updateTime(bookingTime : number) {
+    setTime(bookingTime)
+    console.log('Körs');
+    console.log(bookingTime);
+  }
+
+  function datePicker(bookingDate : string) {
+    setDate(bookingDate);
+    console.log(bookingDate);
+  }
+
+  
+  function selectNumberGuests(bookingGuests : number){
+    setGuests(bookingGuests);
+    console.log("antal gäster" + bookingGuests);
+  }
+
+  function customerDetails(bookingDetails: any) {
+    let name : string = bookingDetails.firstName + " " + bookingDetails.lastName;
+    let email : string = bookingDetails.email;
+
+    const customerDetails = {
+      customerName: name,
+      customerEmail: email
+    }
+    setDetails(customerDetails);
+    console.log(details);
+    
+  }
 
   async function onSubmit(e: any) {
     e.preventDefault();
@@ -50,20 +87,21 @@ export const Booking = (props: IBooking) => {
     <>
       <Navbar/>
       <div>
-        <form onSubmit={onSubmit}>
+        
           <BookingGuests
-            numberOfGuests={bookingValue.numberOfGuests}
+            numberOfGuests={bookingValue.numberOfGuests} pickGuestAmount={selectNumberGuests}
           ></BookingGuests>
-          <BookingCalendar date={bookingValue.date}></BookingCalendar>
-          <BookingTime time={bookingValue.time}></BookingTime>
+          <BookingCalendar date={bookingValue.date} pickDate={datePicker}></BookingCalendar>
+          <BookingTime time={bookingValue.time} addTime={updateTime}></BookingTime>
           <BookingDetails
             date={bookingValue.date}
             time={bookingValue.time}
             numberOfGuests={bookingValue.numberOfGuests}
             customerEmail={bookingValue.customerEmail}
             customerName={bookingValue.customerName}
+            formChange={customerDetails}
           ></BookingDetails>
-        </form>
+       
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import {colorScheme} from '../../styles';
 
 interface IMenuProps {
     isOpen: boolean;
@@ -11,23 +12,23 @@ export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <Nav>
-            <Logo>Athena</Logo>
+            <Logo href="/">Athena</Logo>
             <Hamburger onClick={() => setIsOpen(!isOpen)}>
                 <span></span>
                 <span></span>
                 <span></span>
             </Hamburger>
             <Menu isOpen={isOpen}>
-                <MenuLink href="#">Boka bord</MenuLink>
-                <MenuLink href="#">Meny</MenuLink>
-                <MenuLink href="#">Admin</MenuLink>
+                <MenuLink href="/booking">Boka bord</MenuLink>
+                <MenuLink href="/menu">Meny</MenuLink>
+                <MenuLink href="/admin">Admin</MenuLink>
             </Menu>
         </Nav>
     )
 }
 
 const Nav = styled.div`
-    background: #67bc98;
+    background: ${(colorScheme.main)};
     padding: 0 2rem;
     display: flex;
     justify-content: space-between;

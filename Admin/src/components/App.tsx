@@ -29,6 +29,12 @@ export default function App() {
         </HashRouter>
     );
 
+    const body = {
+        code : "213",
+        dueDate : 24,
+        title : "title "
+    }
+
     // #######################################################################
 
     function PrivateRoute({component, ...rest}: any) {

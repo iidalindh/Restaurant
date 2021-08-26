@@ -5,7 +5,6 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import classnames from "classnames";
 
 // styles
-
 // logo
 import logo from "./logo.svg";
 
@@ -13,6 +12,8 @@ import logo from "./logo.svg";
 import {useUserDispatch} from "../../context/UserContext";
 import {loginUser} from "../../context/UserReducers";
 import styled from "styled-components";
+import {toast} from "react-toastify";
+import AdminService from "../../service/adminService";
 
 interface LoginProps extends RouteComponentProps {
 
@@ -25,8 +26,29 @@ const Login: React.FC<LoginProps> = (props) => {
 
     // local
     let [isLoading, setIsLoading] = useState(false);
-    let [loginValue, setLoginValue] = useState("admin@flatlogic.com");
-    let [passwordValue, setPasswordValue] = useState("password");
+    let [email, setLoginValue] = useState("admin@flatlogic.com");
+    let [password, setPasswordValue] = useState("password");
+
+    function handleLogin() {
+        if (!email)
+            return toast.warn("please fill email")
+        if (!password)
+            return toast.warn("please password value")
+        setIsLoading(true)
+        AdminService.login(email, password).then(res => {
+            setIsLoading(false)
+            console.log(res);
+            loginUser(
+                userDispatch,
+                res.data.token || "",
+            )
+            props.history.push('/app/tables')
+        }).catch(err => {
+            setIsLoading(false)
+            console.log(err);
+            toast.error(err.response ? err.response.data.message : "Some Error")
+        })
+    }
 
     return (
         <Container>
@@ -39,7 +61,7 @@ const Login: React.FC<LoginProps> = (props) => {
                     <React.Fragment>
                         <TextField
                             id="email"
-                            value={loginValue}
+                            value={email}
                             onChange={e => setLoginValue(e.target.value)}
                             margin="normal"
                             placeholder="Email Adress"
@@ -48,7 +70,7 @@ const Login: React.FC<LoginProps> = (props) => {
                         />
                         <TextField
                             id="password"
-                            value={passwordValue}
+                            value={password}
                             onChange={e => setPasswordValue(e.target.value)}
                             margin="normal"
                             placeholder="Password"
@@ -61,14 +83,9 @@ const Login: React.FC<LoginProps> = (props) => {
                             ) : (
                                 <Button
                                     disabled={
-                                        loginValue.length === 0 || passwordValue.length === 0
+                                        email.length === 0 || password.length === 0
                                     }
-                                    onClick={() =>
-                                        loginUser(
-                                            userDispatch,
-                                            props.history,
-                                        )
-                                    }
+                                    onClick={handleLogin}
                                     variant="contained"
                                     color="primary"
                                     size="large"

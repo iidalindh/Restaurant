@@ -7,9 +7,12 @@ import Themes from "./themes";
 import App from "./components/App";
 import {initialLayoutState, LayoutProvider} from "./context/LayoutContext";
 import {initialUserState, UserProvider} from "./context/UserContext";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
     <LayoutProvider {...initialLayoutState}>
+        <ToastContainer/>
         <UserProvider {...initialUserState}>
             <ThemeProvider theme={Themes.default}>
                 <CssBaseline/>

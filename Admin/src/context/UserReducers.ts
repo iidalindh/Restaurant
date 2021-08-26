@@ -51,10 +51,9 @@ const checkForDefine = (state: any, payload: any, key: string, defaultVal?: any)
     else return payload[key];
 };
 
-export function loginUser(dispatch: Dispatch<LayoutAction>, history: any) {
-    localStorage.setItem('id_token', "1")
+export function loginUser(dispatch: Dispatch<LayoutAction>, token:string) {
+    localStorage.setItem('id_token', token)
     dispatch({type: Types.LOGIN_SUCCESS})
-    history.push('/app/dashboard')
 }
 
 export function signOut(dispatch: Dispatch<LayoutAction>, history: any) {

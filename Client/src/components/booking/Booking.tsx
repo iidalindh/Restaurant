@@ -30,7 +30,7 @@ export const Booking = (props: any) => {
     customerEmail: "",
   };
 
-  const [bookingValue, setBookingValue] = useState(defaultValue);
+  
 
   const [time, setTime] = useState(0);
   const [date, setDate] = useState("");
@@ -65,7 +65,7 @@ export const Booking = (props: any) => {
     setDetails(customerDetails);
   }
 
-  function onSubmit(e: any) {
+  async function onSubmit(e: any) {
     e.preventDefault();
 
     const dataToSend: IBooking = {
@@ -76,9 +76,10 @@ export const Booking = (props: any) => {
      customerEmail: details.customerEmail
     };
 
-    setBookingValue(dataToSend);
+    // setBookingValue(dataToSend);
 
-    
+    const res = await axios.post("http://localhost:8000/booking", dataToSend);
+    console.log(res);
   }
     // console.log(customerDetails)
     // console.log(details);
@@ -90,16 +91,16 @@ export const Booking = (props: any) => {
       <div>
         
           <BookingGuests
-            numberOfGuests={bookingValue.numberOfGuests} pickGuestAmount={selectNumberGuests}
+            numberOfGuests={guests} pickGuestAmount={selectNumberGuests}
           ></BookingGuests>
-          <BookingCalendar date={bookingValue.date} pickDate={datePicker}></BookingCalendar>
-          <BookingTime time={bookingValue.time} addTime={updateTime}></BookingTime>
+          <BookingCalendar date={date} pickDate={datePicker}></BookingCalendar>
+          <BookingTime time={time} addTime={updateTime}></BookingTime>
           <BookingDetails
-            date={bookingValue.date}
-            time={bookingValue.time}
-            numberOfGuests={bookingValue.numberOfGuests}
-            customerEmail={bookingValue.customerEmail}
-            customerName={bookingValue.customerName}
+            date={date}
+            time={time}
+            numberOfGuests={guests}
+            customerEmail={details.customerName}
+            customerName={details.customerEmail}
             formChange={customerDetails}
           ></BookingDetails>
        <button type="button" onClick={onSubmit}>Logga all data</button>

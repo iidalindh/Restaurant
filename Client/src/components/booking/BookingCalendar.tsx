@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
-import { IBooking } from "./Booking";
 
 interface IBookingCalendarProps {
   date: string;
   pickDate(date: string): void;
-  //Skapa funktion för att uppdatera state
 }
 
 export const BookingCalendar = (props: IBookingCalendarProps) => {
@@ -18,15 +16,18 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
     props.pickDate(e.toLocaleDateString());
   }
 
-
-  function runFunctions(e : any) {
+  function runFunctions(e: any) {
     changeDate(e);
     selectDate(e);
   }
 
   return (
     <div>
-      <Calendar onChange={runFunctions} value={dateValue} />
+      <Calendar
+        onChange={runFunctions}
+        value={dateValue}
+        minDate={new Date()}
+      />
     </div>
   );
 };

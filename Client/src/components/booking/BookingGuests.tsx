@@ -2,15 +2,17 @@ import React, { useState } from "react";
 
 interface IBookingGuestsProps {
   numberOfGuests: number;
-  pickGuestAmount(guests: number) : void;
-  //Skapa funktion för att uppdatera state
-  
+  pickGuestAmount(guests: number): void;
 }
 
 export const BookingGuests = (props: IBookingGuestsProps) => {
   return (
     <div>
-      <select id="amountOfGuests" name="amountOfGuests" onChange={(e) => props.pickGuestAmount(+e.target.value)}>
+      <select
+        id="amountOfGuests"
+        name="amountOfGuests"
+        onChange={(e) => props.pickGuestAmount(+e.target.value)}
+      >
         <option value={0}>ANTAL GÄSTER</option>
         <option value={1}>1</option>
         <option value={2}>2</option>

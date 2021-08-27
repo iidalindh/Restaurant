@@ -16,6 +16,7 @@ const addNewBooking = async (req, res) => {
     customerName,
     customerEmail,
   });
+
   const saveBooking = await newBooking.save();
 };
 
@@ -100,3 +101,5 @@ const getBookings = async (req, res) => {
   return res.json(responseArray);
 };
 module.exports = { addNewBooking, getBookings };
+
+

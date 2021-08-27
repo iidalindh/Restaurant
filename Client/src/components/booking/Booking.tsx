@@ -16,6 +16,7 @@ export interface IBooking {
   customerEmail: string;
 }
 
+
 export const Booking = (props: any) => {
   let defaultValue: IBooking = {
     numberOfGuests: 0,

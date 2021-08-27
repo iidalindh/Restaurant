@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const registerSubmit = async (req, res) => {
-
+    
     try {
-        const {email, password, passwordVerify} = req.body;
+        const {email, password, passwordVerify} = req.body; 
 
         if(!email || !password || !passwordVerify) {
             return res.status(400).json({message: 'Snälla fyll i alla fälten'});
@@ -39,9 +39,9 @@ const registerSubmit = async (req, res) => {
         const token = await jwt.sign({
             user: savedUser._id,
         }, process.env.PRIVATE_KEY);
-
+      
         console.log(token);
-
+      
         res.cookie("token", token, { httpOnly: true }).send();
 
     } catch (error) {
@@ -59,7 +59,7 @@ const loginSubmit = async (req, res) => {
         }
 
         const existingUser = await User.findOne({email: email});
-
+    
         if (!existingUser) {
             return res.status(400).json({message: 'Inget konto med mailadressen hittades'});
         }
@@ -71,7 +71,7 @@ const loginSubmit = async (req, res) => {
         if (!passwordCorrect) {
             return res.status(401).json({ message: "Wrong email or password" });
           }
-
+      
           if(passwordCorrect) {
               console.log('password match');
           }
@@ -96,17 +96,17 @@ const getLoggedInUser = async (req, res) => {
             return res.json({loggedIn: false, role: ""});
           }
           const userId = jwt.verify(token, process.env.PRIVATE_KEY);
-
+      
           const user = await User.findById(userId.user);
           console.log(user);
-
+      
           if(user.role === "admin") {
             console.log("användaren är admin")
             return res.json({loggedIn: true, role: `${user.role}`})
           } else {
             res.send({loggedIn: true, role: `${user.role}`});
         }
-
+          
       } catch (err) {
           console.error(err);
           res.json({loggedIn: false});

@@ -23,7 +23,11 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
 
   return (
     <div>
-      <Calendar onChange={runFunctions} value={dateValue} />
+      <Calendar
+        onChange={runFunctions}
+        value={dateValue}
+        minDate={new Date()}
+      />
     </div>
   );
 };

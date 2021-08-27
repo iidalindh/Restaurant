@@ -9,7 +9,7 @@ const authRoute = require("./routes/authRoute");
 const bookingRoute = require("./routes/bookingRoute");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
 
 mongoose.set("useFindAndModify", false);
 app.use(express.json());

@@ -17,8 +17,6 @@ export interface IBooking {
 
 }
 
-
-
 //Skapa funktion för att uppdater state (guests, time, date osv.)
 
 export const Booking = (props: any) => {

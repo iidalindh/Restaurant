@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, {useState} from "react";
+import { IBooking } from "./Booking";
+import "./booking.scss";
+import type {FormEvent} from "react";
 
 interface IBookingDetailsProps {
   date: string;
@@ -7,140 +9,69 @@ interface IBookingDetailsProps {
   numberOfGuests: number;
   customerName: string;
   customerEmail: string;
-  formChange(details: object): void;
+  formChange(details : object): void;
+  //Skapa funktion för att uppdatera state
 }
 
+
+
 export const BookingDetails = (props: IBookingDetailsProps) => {
+  // const res = await axios.post("http://localhost:8000/booking", dataToSend);
+  // console.log(res);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 
-  function formSubmit(e: any) {
+  
+
+
+  function formSubmit(e : any) {
+
     const customerData = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-    };
+          firstName: firstName,
+          lastName: lastName,
+          email: email
+       }
+    console.log(customerData);
+    
     e.preventDefault();
-
+    console.log(e);
+    
+   
     props.formChange(customerData);
-  }
+  } 
 
+   
   return (
     <>
-      <BookingSection>
-        <HR />
-        <BookingInfo>
+      <section className="booking-section">
+        <hr />
+        <div className="booking-info">
           <div>
-            <DetailsPTag>DATUM</DetailsPTag>
-            <DetailsPTag>{props.date}</DetailsPTag>
+            <p>DATUM</p>
+            <p>{props.date}</p>
           </div>
           <div>
-            <DetailsPTag>GÄSTER</DetailsPTag>
-            <DetailsPTag>{props.numberOfGuests}</DetailsPTag>
+            <p>GÄSTER</p>
+            <p>{props.numberOfGuests}</p>
           </div>
           <div>
-            <DetailsPTag>TID</DetailsPTag>
-            <DetailsPTag>{props.time}</DetailsPTag>
+            <p>TID</p>
+            <p>{props.time}</p>
           </div>
-        </BookingInfo>
-        <HR />
-
-        <ContactInfo>
-          <MainHeader>KONTAKTUPPGIFTER</MainHeader>
-          <Form onSubmit={formSubmit}>
-            <Input
-              type="text"
-              placeholder="FÖRNAMN"
-              id="firstName"
-              onChange={(e) => {
-                setFirstName(e.target.value);
-              }}
-            ></Input>
-            <Input
-              type="text"
-              placeholder="EFTERNAMN"
-              id="lastName"
-              onChange={(e) => {
-                setLastName(e.target.value);
-              }}
-            ></Input>
-            <Input
-              type="text"
-              placeholder="MEJLADRESS"
-              id="email"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            ></Input>
-            <Button type="submit">BOKA NU</Button>
-          </Form>
-        </ContactInfo>
-      </BookingSection>
+        </div>
+        <hr />
+        <div className="contact-info">
+          <h1>KONTAKTUPPGIFTER</h1>
+          <form onSubmit={formSubmit}>
+            <input type="text" placeholder="FÖRNAMN" id="firstName"  onChange={(e) => {setFirstName(e.target.value)}}/>
+            <input type="text" placeholder="EFTERNAMN" id="lastName" onChange={(e) => {setLastName(e.target.value)}}/>
+            <input type="text" placeholder="MEJLADRESS" id="email" onChange={(e) => {setEmail(e.target.value)}} />
+            <button type="submit">BOKA NU</button>
+          </form>
+        </div>
+      </section>
     </>
   );
 };
-
-const Input = styled.input`
-  width: 80%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  border-color: blue;
-`;
-
-const Button = styled.button`
-  width: 70%;
-  background-color: blue;
-  color: white;
-  padding: 10px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 1.5em;
-
-  &hover {
-    background-color: #213fea;
-  }
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const BookingSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  width: 90vw;
-`;
-
-const BookingInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0;
-`;
-
-const HR = styled.hr`
-  color: black;
-  border-top: 1px solid grey;
-  width: 90%;
-`;
-
-const ContactInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const MainHeader = styled.h1`
-  text-align: center;
-  font-size: 1.8rem;
-`;
-
-const DetailsPTag = styled.p`
-  margin: 0;
-  padding: 0;
-`;

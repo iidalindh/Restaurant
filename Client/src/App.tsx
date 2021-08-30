@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     getLoggedIn();
   }, []);
-  
+
   return (
     <AuthContext.Provider value={{loggedIn, role, getLoggedIn}}>
     <Router>
@@ -53,9 +53,6 @@ function App() {
             customerEmail={bookingValue.customerEmail}
             customerName={bookingValue.customerName}
           /> */}
-        </Route>
-        <Route path="/admin">
-          //Här visar du komponenten som ska visas på den routen
         </Route>
 
         {role === "admin" ? (

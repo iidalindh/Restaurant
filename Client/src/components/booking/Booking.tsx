@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
@@ -5,9 +6,11 @@ import { BookingGuests } from "./BookingGuests";
 import { BookingCalendar } from "./BookingCalendar";
 import { BookingTime } from "./BookingTime";
 import { BookingDetails } from "./BookingDetails";
+
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 import { checkServerIdentity } from "tls";
+
 
 export interface IBooking {
   numberOfGuests: number;
@@ -16,7 +19,12 @@ export interface IBooking {
   customerName: string;
   customerEmail: string;
   checked: boolean;
+
 }
+
+
+
+//Skapa funktion för att uppdater state (guests, time, date osv.)
 
 export const Booking = (props: any) => {
   let defaultValue: IBooking = {
@@ -28,9 +36,12 @@ export const Booking = (props: any) => {
     checked: false,
   };
 
+  
+
   const [time, setTime] = useState(0);
   const [date, setDate] = useState("");
   const [guests, setGuests] = useState(0);
+
   const [details, setDetails] = useState({
     customerName: "",
     customerEmail: "",
@@ -39,18 +50,19 @@ export const Booking = (props: any) => {
 
   const [showComponent, setShowComponent] = useState(true);
 
-  function updateTime(bookingTime: number) {
-    setTime(bookingTime);
-    console.log("Körs");
+  function updateTime(bookingTime : number) {
+    setTime(bookingTime)
+    console.log('Körs');
     console.log(bookingTime);
   }
 
-  function datePicker(bookingDate: string) {
+  function datePicker(bookingDate : string) {
     setDate(bookingDate);
     console.log(bookingDate);
   }
 
-  function selectNumberGuests(bookingGuests: number) {
+  
+  function selectNumberGuests(bookingGuests : number){
     setGuests(bookingGuests);
     console.log("antal gäster" + bookingGuests);
   }
@@ -65,6 +77,7 @@ export const Booking = (props: any) => {
       customerEmail: email,
       checked: checked,
     };
+
     setDetails(customerDetails);
   }
 
@@ -78,15 +91,17 @@ export const Booking = (props: any) => {
       customerName: details.customerName,
       customerEmail: details.customerEmail,
       checked: details.checked,
+
     };
 
     // setBookingValue(dataToSend);
-
-    console.log(dataToSend);
     const res = await axios.post("http://localhost:8000/booking", dataToSend);
     console.log(res);
   }
-
+    // console.log(customerDetails)
+    // console.log(details);
+    // console.log(bookingValue);
+   
   return (
     <>
       <Navbar />
@@ -166,3 +181,4 @@ const Button = styled.button`
     }
   }
 `;
+

@@ -1,33 +1,26 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 
 interface IBookingTimeProps {
   time: number;
-  addTime(time: number): void;
+  addTime(time: number) : void;
+  //Skapa funktion för att uppdatera state
 }
 
 export const BookingTime = (props: IBookingTimeProps) => {
   return (
-    <ButtonDiv>
-      <Button
+    <div>
+      <button
         type="button"
-        onClick={(e: any) => {
-          props.addTime(e.target.value);
-        }}
+        onClick={(e : any) => {props.addTime(e.target.value)}}
         value={18}
       >
         18:00
-      </Button>
-      <Button
-        type="button"
-        value={21}
-        onClick={(e: any) => {
-          props.addTime(e.target.value);
-        }}
-      >
+      </button>
+      <button type="button" value={21} onClick={(e : any) => {props.addTime(e.target.value)}}>
         21:00
-      </Button>
-    </ButtonDiv>
+      </button>
+      <button type="submit">skicka skiten nu</button>
+    </div>
   );
 };
 
@@ -57,3 +50,4 @@ const Button = styled.button`
     color: white;
   }
 `;
+

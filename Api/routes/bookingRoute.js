@@ -1,9 +1,9 @@
-
-const { addNewBooking } = require("../controllers/bookingController");
+const { addNewBooking, getBookings } = require("../controllers/bookingController");
 const express = require("express");
 const router = express.Router();
 
 router.post("/booking", addNewBooking);
 
-module.exports = router;
+router.post("/booking/getAvailableTables", getBookings);
 
+module.exports = router;

@@ -4,7 +4,9 @@ import styled from "styled-components";
 import { Option } from "react-select/src/filters";
 interface IBookingGuestsProps {
   numberOfGuests: number;
-  pickGuestAmount(guests: number): void;
+  pickGuestAmount(guests: number) : void;
+  //Skapa funktion för att uppdatera state
+  
 }
 
 export const BookingGuests = (props: IBookingGuestsProps) => {

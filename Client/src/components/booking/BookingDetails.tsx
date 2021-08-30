@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
+
 interface IBookingDetailsProps {
   date: string;
   time: number;
@@ -11,7 +12,12 @@ interface IBookingDetailsProps {
   formChange(details: object): void;
 }
 
+
+
 export const BookingDetails = (props: IBookingDetailsProps) => {
+  // const res = await axios.post("http://localhost:8000/booking", dataToSend);
+  // console.log(res);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -30,26 +36,26 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
     };
 
     console.log(customerData);
-
     props.formChange(customerData);
-  }
+  } 
 
+   
   return (
     <>
-      <BookingSection>
-        <HR />
-        <BookingInfo>
+      <section className="booking-section">
+        <hr />
+        <div className="booking-info">
           <div>
-            <DetailsPTag>DATUM</DetailsPTag>
-            <DetailsPTag>{props.date}</DetailsPTag>
+            <p>DATUM</p>
+            <p>{props.date}</p>
           </div>
           <div>
-            <DetailsPTag>GÄSTER</DetailsPTag>
-            <DetailsPTag>{props.numberOfGuests}</DetailsPTag>
+            <p>GÄSTER</p>
+            <p>{props.numberOfGuests}</p>
           </div>
           <div>
-            <DetailsPTag>TID</DetailsPTag>
-            <DetailsPTag>{props.time}</DetailsPTag>
+            <p>TID</p>
+            <p>{props.time}</p>
           </div>
         </BookingInfo>
         <HR />
@@ -156,3 +162,4 @@ const DetailsPTag = styled.p`
 const GDPRConfirmDiv = styled.div`
   display: flex;
 `;
+

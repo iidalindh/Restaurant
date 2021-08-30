@@ -19,7 +19,7 @@ const addNewBooking = async (req, res) => {
     customerEmail,
   });
 
-  //   const saveBooking = await newBooking.save();
+  const saveBooking = await newBooking.save();
 };
 
 module.exports = { addNewBooking };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface IBookingDetailsProps {
@@ -7,6 +7,7 @@ interface IBookingDetailsProps {
   numberOfGuests: number;
   customerName: string;
   customerEmail: string;
+  checked: boolean;
   formChange(details: object): void;
 }
 
@@ -14,14 +15,21 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [checked, setChecked] = useState(false);
 
-  function formSubmit(e: any) {
+  useEffect(() => {
+    formSubmit();
+  }, [checked]);
+
+  function formSubmit() {
     const customerData = {
       firstName: firstName,
       lastName: lastName,
       email: email,
+      checked: checked,
     };
-    e.preventDefault();
+
+    console.log(customerData);
 
     props.formChange(customerData);
   }
@@ -48,11 +56,12 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
 
         <ContactInfo>
           <MainHeader>KONTAKTUPPGIFTER</MainHeader>
-          <Form onSubmit={formSubmit}>
+          <Form>
             <Input
               type="text"
               placeholder="FÖRNAMN"
               id="firstName"
+              required
               onChange={(e) => {
                 setFirstName(e.target.value);
               }}
@@ -61,19 +70,34 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
               type="text"
               placeholder="EFTERNAMN"
               id="lastName"
+              required
               onChange={(e) => {
                 setLastName(e.target.value);
               }}
             ></Input>
             <Input
-              type="text"
+              type="email"
               placeholder="MEJLADRESS"
               id="email"
+              required
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
             ></Input>
-            <Button type="submit">BOKA NU</Button>
+            <GDPRConfirmDiv>
+              <Input
+                type="checkbox"
+                id="confirmGDPR"
+                name="confirmGDPR"
+                onChange={() => {
+                  console.log(checked);
+                  setChecked(!checked);
+                  console.log(checked);
+                  // checked ? setChecked(false) : setChecked(true);
+                }}
+              ></Input>
+              <label htmlFor="confirmGDPR"> Jag accepterar villkoren</label>
+            </GDPRConfirmDiv>
           </Form>
         </ContactInfo>
       </BookingSection>
@@ -86,22 +110,6 @@ const Input = styled.input`
   padding: 12px 20px;
   margin: 8px 0;
   border-color: blue;
-`;
-
-const Button = styled.button`
-  width: 70%;
-  background-color: blue;
-  color: white;
-  padding: 10px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 1.5em;
-
-  &hover {
-    background-color: #213fea;
-  }
 `;
 
 const Form = styled.form`
@@ -143,4 +151,8 @@ const MainHeader = styled.h1`
 const DetailsPTag = styled.p`
   margin: 0;
   padding: 0;
+`;
+
+const GDPRConfirmDiv = styled.div`
+  display: flex;
 `;

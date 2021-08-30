@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
@@ -9,7 +8,7 @@ const authRoute = require("./routes/authRoute");
 const bookingRoute = require("./routes/bookingRoute");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.React__App__PORT;
 
 mongoose.set("useFindAndModify", false);
 app.use(express.json());
@@ -29,7 +28,7 @@ app.listen(PORT, () => {
 });
 
 mongoose.connect(
-  process.env.DB_CONNECT,
+  process.env.React__App__DB_CONNECT,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

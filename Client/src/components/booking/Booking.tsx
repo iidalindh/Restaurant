@@ -7,6 +7,7 @@ import { BookingTime } from "./BookingTime";
 import { BookingDetails } from "./BookingDetails";
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
+import { checkServerIdentity } from "tls";
 
 export interface IBooking {
   numberOfGuests: number;
@@ -14,6 +15,7 @@ export interface IBooking {
   time: number;
   customerName: string;
   customerEmail: string;
+  checked: boolean;
 }
 
 export const Booking = (props: any) => {
@@ -23,6 +25,7 @@ export const Booking = (props: any) => {
     time: 18,
     customerName: "",
     customerEmail: "",
+    checked: false,
   };
 
   const [time, setTime] = useState(0);
@@ -31,6 +34,7 @@ export const Booking = (props: any) => {
   const [details, setDetails] = useState({
     customerName: "",
     customerEmail: "",
+    checked: false,
   });
 
   const [showComponent, setShowComponent] = useState(true);
@@ -54,10 +58,12 @@ export const Booking = (props: any) => {
   function customerDetails(bookingDetails: any) {
     let name: string = bookingDetails.firstName + " " + bookingDetails.lastName;
     let email: string = bookingDetails.email;
+    let checked: boolean = bookingDetails.checked;
 
     let customerDetails = {
       customerName: name,
       customerEmail: email,
+      checked: checked,
     };
     setDetails(customerDetails);
   }
@@ -71,14 +77,13 @@ export const Booking = (props: any) => {
       time: time,
       customerName: details.customerName,
       customerEmail: details.customerEmail,
+      checked: details.checked,
     };
 
     // setBookingValue(dataToSend);
 
     console.log(dataToSend);
-    console.log("Nedanför e res");
     const res = await axios.post("http://localhost:8000/booking", dataToSend);
-
     console.log(res);
   }
 
@@ -114,10 +119,17 @@ export const Booking = (props: any) => {
               customerEmail={details.customerName}
               customerName={details.customerEmail}
               formChange={customerDetails}
+              checked={details.checked}
             ></BookingDetails>
-            <button type="button" onClick={onSubmit}>
-              BOKA NU
-            </button>
+            {details.checked ? (
+              <Button type="button" onClick={onSubmit}>
+                BOKA NU
+              </Button>
+            ) : (
+              <Button type="button" disabled={true}>
+                BOKA NU
+              </Button>
+            )}
           </div>
         )}
       </BookingSite>
@@ -145,5 +157,12 @@ const Button = styled.button`
 
   &hover {
     background-color: #213fea;
+  }
+
+  :disabled {
+    background-color: #d4d4d4;
+    :hover {
+      cursor: not-allowed;
+    }
   }
 `;

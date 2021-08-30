@@ -48,7 +48,12 @@ const Button = styled.button`
   cursor: pointer;
   font-size: 1.5em;
 
-  &:hover {
+  :hover {
     background-color: #213fea;
+  }
+
+  :focus {
+    background-color: #213fea;
+    color: white;
   }
 `;

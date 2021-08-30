@@ -6,7 +6,11 @@ import { BookingGuests } from "./BookingGuests";
 import { BookingCalendar } from "./BookingCalendar";
 import { BookingTime } from "./BookingTime";
 import { BookingDetails } from "./BookingDetails";
-import { Navbar } from '../navbar/Navbar';
+
+import { Navbar } from "../navbar/Navbar";
+import styled from "styled-components";
+import { checkServerIdentity } from "tls";
+
 
 export interface IBooking {
   numberOfGuests: number;
@@ -14,6 +18,7 @@ export interface IBooking {
   time: number;
   customerName: string;
   customerEmail: string;
+  checked: boolean;
 
 }
 
@@ -28,6 +33,7 @@ export const Booking = (props: any) => {
     time: 18,
     customerName: "",
     customerEmail: "",
+    checked: false,
   };
 
   
@@ -35,7 +41,14 @@ export const Booking = (props: any) => {
   const [time, setTime] = useState(0);
   const [date, setDate] = useState("");
   const [guests, setGuests] = useState(0);
-  const [details, setDetails] = useState({customerName: "", customerEmail: "",});
+
+  const [details, setDetails] = useState({
+    customerName: "",
+    customerEmail: "",
+    checked: false,
+  });
+
+  const [showComponent, setShowComponent] = useState(true);
 
   function updateTime(bookingTime : number) {
     setTime(bookingTime)
@@ -55,13 +68,16 @@ export const Booking = (props: any) => {
   }
 
   function customerDetails(bookingDetails: any) {
-    let name : string = bookingDetails.firstName + " " + bookingDetails.lastName;
-    let email : string = bookingDetails.email;
+    let name: string = bookingDetails.firstName + " " + bookingDetails.lastName;
+    let email: string = bookingDetails.email;
+    let checked: boolean = bookingDetails.checked;
 
     let customerDetails = {
       customerName: name,
-      customerEmail: email
-    }
+      customerEmail: email,
+      checked: checked,
+    };
+
     setDetails(customerDetails);
   }
 
@@ -69,15 +85,16 @@ export const Booking = (props: any) => {
     e.preventDefault();
 
     const dataToSend: IBooking = {
-     numberOfGuests: guests,
-     date: date,
-     time: time,
-     customerName: details.customerName,
-     customerEmail: details.customerEmail
+      numberOfGuests: guests,
+      date: date,
+      time: time,
+      customerName: details.customerName,
+      customerEmail: details.customerEmail,
+      checked: details.checked,
+
     };
 
     // setBookingValue(dataToSend);
-
     const res = await axios.post("http://localhost:8000/booking", dataToSend);
     console.log(res);
   }
@@ -87,24 +104,81 @@ export const Booking = (props: any) => {
    
   return (
     <>
-      <Navbar/>
-      <div>
-        
-          <BookingGuests
-            numberOfGuests={guests} pickGuestAmount={selectNumberGuests}
-          ></BookingGuests>
-          <BookingCalendar date={date} pickDate={datePicker}></BookingCalendar>
-          <BookingTime time={time} addTime={updateTime}></BookingTime>
-          <BookingDetails
-            date={date}
-            time={time}
-            numberOfGuests={guests}
-            customerEmail={details.customerName}
-            customerName={details.customerEmail}
-            formChange={customerDetails}
-          ></BookingDetails>
-       <button type="button" onClick={onSubmit}>Logga all data</button>
-      </div>
+      <Navbar />
+      <BookingSite>
+        {showComponent ? (
+          <div>
+            <BookingGuests
+              numberOfGuests={guests}
+              pickGuestAmount={selectNumberGuests}
+            ></BookingGuests>
+            <BookingCalendar
+              date={date}
+              pickDate={datePicker}
+            ></BookingCalendar>
+            <BookingTime time={time} addTime={updateTime}></BookingTime>
+            <Button
+              onClick={() => {
+                setShowComponent(false);
+              }}
+            >
+              GÅ VIDARE
+            </Button>
+          </div>
+        ) : (
+          <div>
+            <BookingDetails
+              date={date}
+              time={time}
+              numberOfGuests={guests}
+              customerEmail={details.customerName}
+              customerName={details.customerEmail}
+              formChange={customerDetails}
+              checked={details.checked}
+            ></BookingDetails>
+            {details.checked ? (
+              <Button type="button" onClick={onSubmit}>
+                BOKA NU
+              </Button>
+            ) : (
+              <Button type="button" disabled={true}>
+                BOKA NU
+              </Button>
+            )}
+          </div>
+        )}
+      </BookingSite>
     </>
   );
 };
+
+const BookingSite = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1.3em;
+
+  &hover {
+    background-color: #213fea;
+  }
+
+  :disabled {
+    background-color: #d4d4d4;
+    :hover {
+      cursor: not-allowed;
+    }
+  }
+`;
+

@@ -9,15 +9,16 @@ const addNewBooking = async (req, res) => {
         return res.status(404).json({ message: "fyll i alla fälten" });
     }
 
-    const newBooking = new Booking({
-        date,
-        time,
-        numberOfGuests,
-        customerName,
-        customerEmail,
-    });
+  const newBooking = new Booking({
+    date,
+    time,
+    numberOfGuests,
+    customerName,
+    customerEmail,
+  });
 
-    const saveBooking = await newBooking.save();
+  const saveBooking = await newBooking.save();
+
 };
 
 const getBookings = async (req, res) => {

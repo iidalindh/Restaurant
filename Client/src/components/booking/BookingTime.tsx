@@ -12,12 +12,11 @@ export const BookingTime = (props: IBookingTimeProps) => {
     <ButtonDiv>
       <Button
         type="button"
-        onClick={(e : any) => {props.addTime(e.target.value)}}
-        value={18}
+        onClick={() => {props.addTime(18)}}
       >
         18:00
       </Button>
-      <Button type="button" value={21} onClick={(e : any) => {props.addTime(e.target.value)}}>
+      <Button type="button" onClick={() => {props.addTime(21)}}>
         21:00
       </Button>
     </ButtonDiv>

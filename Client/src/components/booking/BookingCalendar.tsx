@@ -5,7 +5,6 @@ import { IBooking } from "./Booking";
 interface IBookingCalendarProps {
   date: string;
   pickDate(date: string): void;
-  //Skapa funktion för att uppdatera state
 }
 
 export const BookingCalendar = (props: IBookingCalendarProps) => {
@@ -26,7 +25,9 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
 
   return (
     <div>
-      <Calendar onChange={runFunctions} value={dateValue} />
+      <Calendar onChange={runFunctions} 
+      value={dateValue} 
+      minDate={new Date()}/>
     </div>
   );
 };

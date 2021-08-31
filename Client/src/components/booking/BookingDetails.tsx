@@ -15,8 +15,6 @@ interface IBookingDetailsProps {
 
 
 export const BookingDetails = (props: IBookingDetailsProps) => {
-  // const res = await axios.post("http://localhost:8000/booking", dataToSend);
-  // console.log(res);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -34,28 +32,26 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
       email: email,
       checked: checked,
     };
-
-    console.log(customerData);
     props.formChange(customerData);
   } 
 
    
   return (
     <>
-      <section className="booking-section">
-        <hr />
-        <div className="booking-info">
+      <BookingSection>
+        <HR />
+        <BookingInfo>
           <div>
-            <p>DATUM</p>
-            <p>{props.date}</p>
+            <DetailsPTag>DATUM</DetailsPTag>
+            <DetailsPTag>{props.date}</DetailsPTag>
           </div>
           <div>
-            <p>GÄSTER</p>
-            <p>{props.numberOfGuests}</p>
+            <DetailsPTag>GÄSTER</DetailsPTag>
+            <DetailsPTag>{props.numberOfGuests}</DetailsPTag>
           </div>
           <div>
-            <p>TID</p>
-            <p>{props.time}</p>
+            <DetailsPTag>TID</DetailsPTag>
+            <DetailsPTag>{props.time}</DetailsPTag>
           </div>
         </BookingInfo>
         <HR />
@@ -96,10 +92,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
                 id="confirmGDPR"
                 name="confirmGDPR"
                 onChange={() => {
-                  console.log(checked);
                   setChecked(!checked);
-                  console.log(checked);
-                  // checked ? setChecked(false) : setChecked(true);
                 }}
               ></Input>
               <label htmlFor="confirmGDPR"> Jag accepterar villkoren</label>

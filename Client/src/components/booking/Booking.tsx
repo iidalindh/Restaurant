@@ -9,7 +9,6 @@ import { BookingDetails } from "./BookingDetails";
 
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
-import { checkServerIdentity } from "tls";
 
 
 export interface IBooking {
@@ -21,10 +20,6 @@ export interface IBooking {
   checked: boolean;
 
 }
-
-
-
-//Skapa funktion för att uppdater state (guests, time, date osv.)
 
 export const Booking = (props: any) => {
   let defaultValue: IBooking = {
@@ -94,13 +89,9 @@ export const Booking = (props: any) => {
 
     };
 
-    // setBookingValue(dataToSend);
     const res = await axios.post("http://localhost:8000/booking", dataToSend);
     console.log(res);
   }
-    // console.log(customerDetails)
-    // console.log(details);
-    // console.log(bookingValue);
    
   return (
     <>

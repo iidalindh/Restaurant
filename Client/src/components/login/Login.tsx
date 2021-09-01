@@ -32,13 +32,13 @@ export const Login = () => {
         <input
           type="email"
           placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e : React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
           value={email}
         />
         <input
           type="password"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e : React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           value={password}
         />
 

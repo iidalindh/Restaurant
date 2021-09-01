@@ -9,15 +9,16 @@ const addNewBooking = async (req, res) => {
         return res.status(404).json({ message: "fyll i alla fälten" });
     }
 
-    const newBooking = new Booking({
-        date,
-        time,
-        numberOfGuests,
-        customerName,
-        customerEmail,
-    });
+  const newBooking = new Booking({
+    date,
+    time,
+    numberOfGuests,
+    customerName,
+    customerEmail,
+  });
 
-    const saveBooking = await newBooking.save();
+  const saveBooking = await newBooking.save();
+
 };
 
 const getBookings = async (req, res) => {
@@ -32,7 +33,7 @@ const getBookings = async (req, res) => {
     }
 
     if (date < Date.now()) {
-        return res.status(400).json({
+        return res.status(204).json({
             message: "Något blev fel. Säkerställ att alla fält är ifyllda korrekt",
         });
     }
@@ -72,7 +73,7 @@ const getBookings = async (req, res) => {
             if(numberOfGuests < 90) {
                 responseArray.push({ availableTables: true, time: 18 });
             } else {
-                return res.status(400).json({message: 'Antal gäster i din bokning är för stor'});
+                return res.status(204).json({message: 'Antal gäster i din bokning är för stor'});
             }
         }
 
@@ -89,11 +90,13 @@ const getBookings = async (req, res) => {
             if (tablesRequired <= availableTables) {
                 responseArray.push({ availableTables: true, time: 21 });
             } else {
-                if(numberOfGuests < 90) {
-                    responseArray.push({ availableTables: true, time: 18 });
-                } else {
-                    return res.status(400).json({message: 'Antal gäster i din bokning är för stor'});
-                }
+                responseArray.push({ availableTables: false, time: 21 });
+            }
+        } else {
+            if(numberOfGuests < 90) {
+                responseArray.push({ availableTables: true, time: 21 });
+            } else {
+                return res.status(204).json({message: 'Antal gäster i din bokning är för stor'});
             }
         }
     }

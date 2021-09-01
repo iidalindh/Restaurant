@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-
 interface IBookingTimeProps {
   time: number;
-  addTime(time: number) : void;
+  addTime(time: number): void;
 }
 
 export const BookingTime = (props: IBookingTimeProps) => {
@@ -12,12 +11,20 @@ export const BookingTime = (props: IBookingTimeProps) => {
     <ButtonDiv>
       <Button
         type="button"
-        onClick={(e : any) => {props.addTime(e.target.value)}}
+        onClick={(e: any) => {
+          props.addTime(e.target.value);
+        }}
         value={18}
       >
         18:00
       </Button>
-      <Button type="button" value={21} onClick={(e : any) => {props.addTime(e.target.value)}}>
+      <Button
+        type="button"
+        value={21}
+        onClick={(e: any) => {
+          props.addTime(e.target.value);
+        }}
+      >
         21:00
       </Button>
     </ButtonDiv>
@@ -28,6 +35,12 @@ const ButtonDiv = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  //Desktop
+  @media (min-width: 1025px) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 `;
 
 const Button = styled.button`
@@ -50,4 +63,3 @@ const Button = styled.button`
     color: white;
   }
 `;
-

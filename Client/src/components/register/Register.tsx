@@ -33,9 +33,9 @@ export const Register = () => {
         <div className="register-container">
             <h1>Registrera ett nytt konto</h1>
             <form onSubmit={register}>
-                <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} />
-                <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} />
-                <input type="password" placeholder="Repeat password" onChange={(e) => setPasswordVerify(e.target.value)} value={passwordVerify} />
+                <input type="email" placeholder="Email" onChange={(e : React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} value={email} />
+                <input type="password" placeholder="Password" onChange={(e : React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} value={password} />
+                <input type="password" placeholder="Repeat password" onChange={(e : React.ChangeEvent<HTMLInputElement>) => setPasswordVerify(e.target.value)} value={passwordVerify} />
                 <button type="submit">Registrera</button>    
             </form> 
             

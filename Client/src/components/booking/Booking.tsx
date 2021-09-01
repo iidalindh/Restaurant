@@ -18,7 +18,7 @@ export interface IBooking {
   checked: boolean;
 }
 
-export const Booking = (props: any) => {
+export const Booking = () => {
   let defaultValue: IBooking = {
     numberOfGuests: 0,
     date: "2018-02-12",
@@ -70,7 +70,7 @@ export const Booking = (props: any) => {
     setDetails(customerDetails);
   }
 
-  async function onSubmit(e: any) {
+  async function onSubmit(e : React.MouseEvent<HTMLButtonElement>){
     e.preventDefault();
 
     const dataToSend: IBooking = {

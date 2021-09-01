@@ -59,7 +59,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
               placeholder="FÖRNAMN"
               id="firstName"
               required
-              onChange={(e) => {
+              onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
                 setFirstName(e.target.value);
               }}
             ></Input>
@@ -68,7 +68,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
               placeholder="EFTERNAMN"
               id="lastName"
               required
-              onChange={(e) => {
+              onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
                 setLastName(e.target.value);
               }}
             ></Input>
@@ -77,7 +77,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
               placeholder="MEJLADRESS"
               id="email"
               required
-              onChange={(e) => {
+              onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
                 setEmail(e.target.value);
               }}
             ></Input>

@@ -83,6 +83,9 @@ export const Booking = () => {
     setTime18(btn18);
   }
 
+  function buttonState21(btn21 : boolean) {
+    setTime21(btn21);
+  }
   async function onSubmit(e : React.MouseEvent<HTMLButtonElement>){
     e.preventDefault();
 
@@ -119,8 +122,10 @@ export const Booking = () => {
               date={date}
               pickDate={datePicker}
               button18={buttonState18}
+              button21={buttonState21}
+              numberOfGuests={guests}
             ></BookingCalendar>
-            <BookingTime time={time} addTime={updateTime} time18={time18}></BookingTime>
+            <BookingTime time={time} addTime={updateTime} time18={time18} time21={time21}></BookingTime>
             <Button
               onClick={() => {
                 setShowComponent(false);

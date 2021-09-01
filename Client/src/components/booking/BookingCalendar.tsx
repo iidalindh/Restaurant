@@ -7,6 +7,8 @@ interface IBookingCalendarProps {
   date: string;
   pickDate(date: string): void;
   button18(btnState18 : boolean) : void;
+  button21(btnState21 : boolean) : void;
+  numberOfGuests : number;
 }
 
 export const BookingCalendar = (props: IBookingCalendarProps) => {
@@ -22,7 +24,7 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
   async function getAvailableTables() {
     const date = dateValue.toLocaleDateString();
     const data = {
-      numberOfGuests: 91,
+      numberOfGuests: props.numberOfGuests,
       date: date
     }
     const res = await axios.post ("http://localhost:8000/booking/getAvailableTables", data);
@@ -37,9 +39,9 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
         }
       } else if(res.data[ida].time === 21) {
         if(res.data[ida].availableTables === false) {
-          console.log('disable knapp jäveln för 21');
+          props.button21(false); 
         } else {
-          console.log('varmt välkommen klockan 21 motherfucker');
+          props.button21(true);
         }
       } 
       

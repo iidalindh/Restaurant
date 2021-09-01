@@ -6,6 +6,7 @@ interface IBookingTimeProps {
   time: number;
   addTime(time: number) : void;
   time18: boolean;
+  time21: boolean;
 }
 
 export const BookingTime = (props: IBookingTimeProps) => {
@@ -23,10 +24,12 @@ export const BookingTime = (props: IBookingTimeProps) => {
       >
         18:00
       </Button> }
-      
-      <Button type="button" onClick={() => {props.addTime(21)}}>
+      {props.time18 !== true ? <Button type="button" disabled={true} onClick={() => {props.addTime(21)}}>
         21:00
-      </Button>
+      </Button> : <Button type="button" onClick={() => {props.addTime(21)}}>
+        21:00
+      </Button>}
+      
     </ButtonDiv>
   );
 };

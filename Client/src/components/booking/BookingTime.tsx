@@ -5,17 +5,25 @@ import styled from "styled-components";
 interface IBookingTimeProps {
   time: number;
   addTime(time: number) : void;
+  time18: boolean;
 }
 
 export const BookingTime = (props: IBookingTimeProps) => {
   return (
     <ButtonDiv>
-      <Button
+      {props.time18 !== true ? <Button
+        type="button"
+        onClick={() => {props.addTime(18)}}
+        disabled={true}
+      >
+        18:00
+      </Button> : <Button
         type="button"
         onClick={() => {props.addTime(18)}}
       >
         18:00
-      </Button>
+      </Button> }
+      
       <Button type="button" onClick={() => {props.addTime(21)}}>
         21:00
       </Button>
@@ -47,6 +55,13 @@ const Button = styled.button`
   :focus {
     background-color: #213fea;
     color: white;
+  }
+
+  :disabled {
+    background-color: #d4d4d4;
+    :hover {
+      cursor: not-allowed;
+    }
   }
 `;
 

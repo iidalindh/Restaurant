@@ -6,6 +6,7 @@ import { IBooking } from "./Booking";
 interface IBookingCalendarProps {
   date: string;
   pickDate(date: string): void;
+  button18(btnState18 : boolean) : void;
 }
 
 export const BookingCalendar = (props: IBookingCalendarProps) => {
@@ -21,7 +22,7 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
   async function getAvailableTables() {
     const date = dateValue.toLocaleDateString();
     const data = {
-      numberOfGuests: 9,
+      numberOfGuests: 91,
       date: date
     }
     const res = await axios.post ("http://localhost:8000/booking/getAvailableTables", data);
@@ -30,10 +31,9 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
     for (let ida = 0; ida < res.data.length; ida++) {
       if(res.data[ida].time === 18) {
         if(res.data[ida].availableTables === false) {
-          console.log('disable knapp jäveln för 18'); 
+          props.button18(false); 
         } else {
-          console.log('varmt välkommen klockan 18 motherfucker');
-          
+          props.button18(true);
         }
       } else if(res.data[ida].time === 21) {
         if(res.data[ida].availableTables === false) {

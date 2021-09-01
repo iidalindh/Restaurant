@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-
 interface IBookingTimeProps {
   time: number;
   addTime(time: number) : void;
@@ -24,7 +23,7 @@ export const BookingTime = (props: IBookingTimeProps) => {
       >
         18:00
       </Button> }
-      {props.time18 !== true ? <Button type="button" disabled={true} onClick={() => {props.addTime(21)}}>
+      {props.time21 !== true ? <Button type="button" disabled={true} onClick={() => {props.addTime(21)}}>
         21:00
       </Button> : <Button type="button" onClick={() => {props.addTime(21)}}>
         21:00
@@ -38,6 +37,12 @@ const ButtonDiv = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  //Desktop
+  @media (min-width: 1025px) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 `;
 
 const Button = styled.button`
@@ -67,4 +72,3 @@ const Button = styled.button`
     }
   }
 `;
-

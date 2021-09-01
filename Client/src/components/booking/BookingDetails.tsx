@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-
 interface IBookingDetailsProps {
   date: string;
   time: number;
@@ -12,10 +11,7 @@ interface IBookingDetailsProps {
   formChange(details: object): void;
 }
 
-
-
 export const BookingDetails = (props: IBookingDetailsProps) => {
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,9 +29,8 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
       checked: checked,
     };
     props.formChange(customerData);
-  } 
+  }
 
-   
   return (
     <>
       <BookingSection>
@@ -51,7 +46,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
           </div>
           <div>
             <DetailsPTag>TID</DetailsPTag>
-            <DetailsPTag>{props.time}</DetailsPTag>
+            <DetailsPTag>{props.time}:00</DetailsPTag>
           </div>
         </BookingInfo>
         <HR />
@@ -105,7 +100,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
 };
 
 const Input = styled.input`
-  width: 80%;
+  width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   border-color: blue;
@@ -114,13 +109,25 @@ const Input = styled.input`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  width: 80%;
+
+  //Desktop
+  @media (min-width: 1025px) {
+    width: 75%;
+  }
 `;
 
 const BookingSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 90vw;
+
+  //Desktop
+  @media (min-width: 1025px) {
+    width: 70vw;
+  }
 `;
 
 const BookingInfo = styled.div`
@@ -135,11 +142,21 @@ const HR = styled.hr`
   color: black;
   border-top: 1px solid grey;
   width: 90%;
+
+  //Desktop
+  @media (min-width: 1025px) {
+    width: 75%;
+    :first-child: {
+      margin-top: 30px;
+      padding: 0;
+    }
+  }
 `;
 
 const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const MainHeader = styled.h1`
@@ -155,4 +172,3 @@ const DetailsPTag = styled.p`
 const GDPRConfirmDiv = styled.div`
   display: flex;
 `;
-

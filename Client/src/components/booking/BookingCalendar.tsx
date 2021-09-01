@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import { IBooking } from "./Booking";
+import MediaQuery from "react-responsive";
 
 interface IBookingCalendarProps {
   date: string;
@@ -50,6 +51,7 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
   }
 
   function runFunctions(e : any) {
+
     changeDate(e);
     selectDate(e);
     getAvailableTables();
@@ -57,9 +59,21 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
 
   return (
     <div>
-      <Calendar onChange={runFunctions} 
-      value={dateValue} 
-      minDate={new Date()}/>
+      <MediaQuery minDeviceWidth={1224}>
+        <Calendar
+          onChange={runFunctions}
+          value={dateValue}
+          minDate={new Date()}
+          showDoubleView={true}
+        />
+      </MediaQuery>
+      <MediaQuery maxDeviceWidth={1224}>
+        <Calendar
+          onChange={runFunctions}
+          value={dateValue}
+          minDate={new Date()}
+        />{" "}
+      </MediaQuery>
     </div>
   );
 };

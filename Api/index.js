@@ -8,6 +8,7 @@ const cors = require("cors");
 const authRoute = require("./routes/authRoute");
 const bookingRoute = require("./routes/bookingRoute");
 const adminAuthRoute = require("./routes/adminAuthRoute");
+const adminRoute = require("./routes/adminRoute");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -25,6 +26,7 @@ app.use(
 app.use(authRoute);
 app.use(bookingRoute);
 app.use("/admin",adminAuthRoute);
+app.use("/admin",adminRoute);
 
 app.listen(PORT, () => {
   console.log(`server running on port: ${PORT}`);

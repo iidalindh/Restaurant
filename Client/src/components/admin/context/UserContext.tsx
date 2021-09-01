@@ -9,7 +9,7 @@ export type InitialNullableStateType = {
 };
 
 export const initialUserState: InitialStateType = {
-    isAuthenticated:true
+    isAuthenticated: true
 };
 
 

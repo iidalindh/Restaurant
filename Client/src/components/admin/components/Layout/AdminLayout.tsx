@@ -1,26 +1,27 @@
 import React from "react";
-import {Route, RouteComponentProps, Switch, withRouter,} from "react-router-dom";
+import {Redirect, Route, RouteComponentProps, Switch, withRouter,} from "react-router-dom";
 
 //icons
 // styles
 
 // components
-import Header from "../Header";
-import Sidebar from "../Sidebar";
+import Header from "../Header/Header";
+import Sidebar from "../Sidebar/Sidebar";
 
 
 // context
 import {useLayoutState} from "../../context/LayoutContext";
 import styled from "styled-components";
 import Admins from "../../pages/admins/Admins";
-import Tables from "../../pages/tables/Tables";
+import Bookings from "../../pages/tables/bookings";
 import AdminEdit from "../../pages/admins/AdminEdit";
+import BookingEdit from "../../pages/tables/bookingEdit";
 
 interface LayoutProps extends RouteComponentProps {
 
 }
 
-const Layout: React.FC<LayoutProps> = (props) => {
+const AdminLayout: React.FC<LayoutProps> = (props) => {
 
     // global
     const layoutState = useLayoutState();
@@ -35,9 +36,11 @@ const Layout: React.FC<LayoutProps> = (props) => {
                 >
                     <FakeToolbar/>
                     <Switch>
-                        <Route path="/app/tables" component={Tables}/>
-                        <Route path="/app/admins/:id" component={AdminEdit}/>
-                        <Route path="/app/admins" component={Admins}/>
+                        <Route path="/admin/bookings/:id" component={BookingEdit}/>
+                        <Route path="/admin/bookings" component={Bookings}/>
+                        <Route path="/admin/admins/:id" component={AdminEdit}/>
+                        <Route path="/admin/admins" component={Admins}/>
+                        <Route render={() => <Redirect to={"/admin/bookings"}/>}/>
                     </Switch>
                 </Content>
             </>
@@ -62,4 +65,4 @@ const FakeToolbar = styled.div`
   min-height: 64px;
 `
 
-export default withRouter(Layout);
+export default withRouter(AdminLayout);

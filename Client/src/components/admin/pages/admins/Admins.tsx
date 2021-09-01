@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "../../components/PageTitle/PageTitle";
 import User from "../../models/User";
-import AdminService from "../../service/adminService";
+import AdminAuthService from "../../service/adminAuthService";
 import {toast} from "react-toastify";
 import MUIDataTable from "mui-datatables";
 import {Button} from "@material-ui/core";
@@ -17,7 +17,7 @@ const Admins: React.FC<AdminsProps> = (props) => {
     const [adminsTransformed, setAdminsTransformed] = useState<any[][]>([]);
 
     const updateData = () => {
-        AdminService.getAdmins().then(res => {
+        AdminAuthService.getAdmins().then(res => {
             setAdminsTransformed(transformData(res.data))
             setAdmins(res.data);
         }).catch(err => toast.error(err.response ? err.response.data.message : err.message))
@@ -26,13 +26,13 @@ const Admins: React.FC<AdminsProps> = (props) => {
     useEffect(updateData, [])
 
     const handleDelete = (item: User) => {
-        AdminService.deleteAdmin(item._id || "").then(res => {
+        AdminAuthService.deleteAdmin(item._id || "").then(res => {
             updateData()
         }).catch(err => toast.error(err.response ? err.response.data.message : err.message))
     }
 
     function handleEdit(item: User) {
-        props.history.push(`/app/admins/${item._id}`)
+        props.history.push(`/admin/admins/${item._id}`)
     }
 
     const transformData = (data: User[]) => {
@@ -42,7 +42,7 @@ const Admins: React.FC<AdminsProps> = (props) => {
     }
 
     const handleAddAdmin = () => {
-        props.history.push(`/app/admins/create`)
+        props.history.push(`/admin/admins/create`)
     }
 
     return (
@@ -51,7 +51,7 @@ const Admins: React.FC<AdminsProps> = (props) => {
                        button={<Button color={"secondary"} variant={"outlined"} onClick={handleAddAdmin}>Add
                            Admin</Button>}/>
             <MUIDataTable
-                title="Employee List"
+                title="Admin List"
                 data={adminsTransformed}
                 options={{
                     selectableRows: "none",

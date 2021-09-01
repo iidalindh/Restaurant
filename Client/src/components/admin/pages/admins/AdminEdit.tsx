@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import User from "../../models/User";
 import {Button, TextField} from "@material-ui/core";
 import {RouteComponentProps, useParams} from 'react-router-dom';
-import AdminService from "../../service/adminService";
+import AdminAuthService from "../../service/adminAuthService";
 import styled from "styled-components";
 import {toast} from "react-toastify";
 
@@ -23,7 +23,7 @@ const AdminEdit: React.FC<RouteComponentProps> = (props) => {
 
     useEffect(() => {
         if (id !== "create")
-            AdminService.getAdminById(id).then(res => {
+            AdminAuthService.getAdminById(id).then(res => {
                 setAdmin(res.data)
             }).catch(err => toast.error(err.response ? err.response.data.message : err.message))
     }, [id])
@@ -38,8 +38,8 @@ const AdminEdit: React.FC<RouteComponentProps> = (props) => {
             return toast.warn("Fill All Fields")
         else if (admin.password !== admin.confirmPassword)
             return toast.warn("Passwords are not similar")
-        AdminService.saveAdmin(admin).then(res => {
-            props.history.push("/app/admins")
+        AdminAuthService.saveAdmin(admin).then(res => {
+            props.history.push("/admin/admins")
         }).catch(err => toast.error(err.response ? err.response.data.message : err.message))
     }
 

@@ -98,8 +98,9 @@ const AppBarStyled = styled(AppBar)`
   color: #fff;
   background-color: #536DFE;
   width: 100vw;
-  z-index: 1201;
+  z-index: 100000 !important;
   transition: margin 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+  
 `
 
 const ToolbarStyled = styled(Toolbar)`

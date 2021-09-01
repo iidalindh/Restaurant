@@ -4,7 +4,7 @@ import "./landingpage.scss";
 import { Navbar } from '../navbar/Navbar';
 export const LandingPage = () => {
   return (
-    <>
+    <div className="landingPage">
       <Navbar />
       <section className="frontpage">
         <h1>SÖDERMALM</h1>
@@ -22,7 +22,7 @@ export const LandingPage = () => {
           <button>MENY</button>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

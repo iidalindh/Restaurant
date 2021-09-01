@@ -1,13 +1,13 @@
 import React from "react";
 import {ThemeProvider} from "@material-ui/styles";
 import {CssBaseline} from "@material-ui/core";
-import './index.css'
 import Themes from "./themes";
-import App from "./components/App";
 import {initialLayoutState, LayoutProvider} from "./context/LayoutContext";
 import {initialUserState, UserProvider} from "./context/UserContext";
+// @ts-ignore
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import AdminLayout from "./components/Layout/AdminLayout";
 
 
 export const Admin = () => {
@@ -17,9 +17,11 @@ export const Admin = () => {
             <UserProvider {...initialUserState}>
                 <ThemeProvider theme={Themes.default}>
                     <CssBaseline/>
-                    <App/>
+                    <AdminLayout/>
                 </ThemeProvider>
             </UserProvider>
         </LayoutProvider>
     )
 }
+
+

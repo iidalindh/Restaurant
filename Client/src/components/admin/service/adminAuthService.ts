@@ -5,7 +5,7 @@ import User from "../models/User";
 const adminCrudEndPoints = "/admin/admins"
 const adminAuthEndPoints = "/admin/login"
 
-export default class AdminService {
+export default class AdminAuthService {
 
     static login(email: string, password: string): Promise<AxiosResponse<User>> {
         return http.post(adminAuthEndPoints, {email, password})
@@ -18,6 +18,7 @@ export default class AdminService {
     static getAdminById(adminId: string): Promise<AxiosResponse<User>> {
         return http.get(adminCrudEndPoints + `/${adminId}`)
     }
+
 
     static saveAdmin(admin: User): Promise<User> {
         if (admin._id) {

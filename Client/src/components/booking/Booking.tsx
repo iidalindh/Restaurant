@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
@@ -10,7 +9,6 @@ import { BookingDetails } from "./BookingDetails";
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 
-
 export interface IBooking {
   numberOfGuests: number;
   date: string;
@@ -18,7 +16,6 @@ export interface IBooking {
   customerName: string;
   customerEmail: string;
   checked: boolean;
-
 }
 
 export const Booking = () => {
@@ -31,8 +28,6 @@ export const Booking = () => {
     checked: false,
   };
 
-  
-
   const [time, setTime] = useState(0);
   const [date, setDate] = useState("");
   const [guests, setGuests] = useState(0);
@@ -42,22 +37,21 @@ export const Booking = () => {
     customerEmail: "",
     checked: false,
   });
-
+  
   const [showComponent, setShowComponent] = useState(true);
 
-  function updateTime(bookingTime : number) {
-    setTime(bookingTime)
-    console.log('Körs');
+  function updateTime(bookingTime: number) {
+    setTime(bookingTime);
+    console.log("Körs");
     console.log(bookingTime);
   }
 
-  function datePicker(bookingDate : string) {
+  function datePicker(bookingDate: string) {
     setDate(bookingDate);
     console.log(bookingDate);
   }
 
-  
-  function selectNumberGuests(bookingGuests : number){
+  function selectNumberGuests(bookingGuests: number) {
     setGuests(bookingGuests);
     console.log("antal gäster" + bookingGuests);
   }
@@ -86,13 +80,12 @@ export const Booking = () => {
       customerName: details.customerName,
       customerEmail: details.customerEmail,
       checked: details.checked,
-
     };
 
     const res = await axios.post("http://localhost:8000/booking", dataToSend);
     console.log(res);
   }
-   
+
   return (
     <>
       <Navbar />
@@ -172,4 +165,3 @@ const Button = styled.button`
     }
   }
 `;
-

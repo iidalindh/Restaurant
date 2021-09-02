@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
 import { BookingGuests } from "./BookingGuests";
@@ -39,6 +39,9 @@ export const Booking = () => {
   });
 
   const [showComponent, setShowComponent] = useState(true);
+  const [time18, setTime18] = useState(false);
+  const [time21, setTime21] = useState(false);
+
 
   function updateTime(bookingTime: number) {
     setTime(bookingTime);
@@ -70,6 +73,13 @@ export const Booking = () => {
     setDetails(customerDetails);
   }
 
+  function buttonState18(btn18 : boolean) {
+    setTime18(btn18);
+  }
+
+  function buttonState21(btn21 : boolean) {
+    setTime21(btn21);
+  }
   async function onSubmit(e : React.MouseEvent<HTMLButtonElement>){
     e.preventDefault();
 
@@ -86,6 +96,13 @@ export const Booking = () => {
     console.log(res);
   }
 
+
+  useEffect(() => {
+    console.log(time18);
+    
+  }, [time18])
+   
+
   return (
     <>
       <Navbar />
@@ -99,8 +116,11 @@ export const Booking = () => {
             <BookingCalendar
               date={date}
               pickDate={datePicker}
+              button18={buttonState18}
+              button21={buttonState21}
+              numberOfGuests={guests}
             ></BookingCalendar>
-            <BookingTime time={time} addTime={updateTime}></BookingTime>
+            <BookingTime time={time} addTime={updateTime} time18={time18} time21={time21}></BookingTime>
             <Button
               onClick={() => {
                 setShowComponent(false);

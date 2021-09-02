@@ -7,6 +7,9 @@ import MediaQuery from "react-responsive";
 interface IBookingCalendarProps {
   date: string;
   pickDate(date: string): void;
+  button18(btnState18 : boolean) : void;
+  button21(btnState21 : boolean) : void;
+  numberOfGuests : number;
 }
 
 export const BookingCalendar = (props: IBookingCalendarProps) => {
@@ -22,33 +25,32 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
   async function getAvailableTables() {
     const date = dateValue.toLocaleDateString();
     const data = {
-      numberOfGuests: 9,
-      date: date,
-    };
-    const res = await axios.post(
-      "http://localhost:8000/booking/getAvailableTables",
-      data
-    );
+      numberOfGuests: props.numberOfGuests,
+      date: date
+    }
+    const res = await axios.post ("http://localhost:8000/booking/getAvailableTables", data);
     console.log(res.data);
 
     for (let ida = 0; ida < res.data.length; ida++) {
-      if (res.data[ida].time === 18) {
-        if (res.data[ida].availableTables === false) {
-          console.log("disable knapp jäveln för 18");
+      if(res.data[ida].time === 18) {
+        if(res.data[ida].availableTables === false) {
+          props.button18(false); 
         } else {
-          console.log("varmt välkommen klockan 18 motherfucker");
+          props.button18(true);
         }
-      } else if (res.data[ida].time === 21) {
-        if (res.data[ida].availableTables === false) {
-          console.log("disable knapp jäveln för 21");
+      } else if(res.data[ida].time === 21) {
+        if(res.data[ida].availableTables === false) {
+          props.button21(false); 
         } else {
-          console.log("varmt välkommen klockan 21 motherfucker");
+          props.button21(true);
         }
-      }
+      } 
+      
     }
+    
   }
 
-  function runFunctions(e: any) {
+  function runFunctions(e : any) {
     changeDate(e);
     selectDate(e);
     getAvailableTables();

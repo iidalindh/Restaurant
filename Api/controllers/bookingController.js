@@ -124,15 +124,38 @@ const getBookings = async (req, res) => {
       if (tablesRequired <= availableTables) {
         responseArray.push({ availableTables: true, time: 21 });
       } else {
-        responseArray.push({ availableTables: false, time: 21 });
-      }
-    } else {
-      if (numberOfGuests < 90) {
-        responseArray.push({ availableTables: true, time: 21 });
-      } else {
-        return res
-          .status(204)
-          .json({ message: "Antal gäster i din bokning är för stor" });
+        if (numberOfGuests < 90) {
+          responseArray.push({ availableTables: true, time: 18 });
+        } else {
+            if(numberOfGuests < 90) {
+                responseArray.push({ availableTables: true, time: 18 });
+            } else {
+                return res.status(204).json({message: 'Antal gäster i din bokning är för stor'});
+            }
+        }
+
+        if (time21.length > 0) {
+            let availableTables = 15;
+
+            for (let i = 0; i < time21.length; i++) {
+                let tablesNeeded = Math.ceil(time21[i].numberOfGuests / 6);
+                availableTables = availableTables - tablesNeeded;
+            }
+
+            let tablesRequired = Math.ceil(numberOfGuests / 6);
+
+            if (tablesRequired <= availableTables) {
+                responseArray.push({ availableTables: true, time: 21 });
+            } else {
+                responseArray.push({ availableTables: false, time: 21 });
+            }
+        } else {
+            if(numberOfGuests < 90) {
+                responseArray.push({ availableTables: true, time: 21 });
+            } else {
+                return res.status(204).json({message: 'Antal gäster i din bokning är för stor'});
+            }
+        }
       }
     }
   }

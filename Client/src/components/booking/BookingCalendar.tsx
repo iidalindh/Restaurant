@@ -51,7 +51,6 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
   }
 
   function runFunctions(e : any) {
-
     changeDate(e);
     selectDate(e);
     getAvailableTables();

@@ -37,7 +37,7 @@ export const Booking = () => {
     customerEmail: "",
     checked: false,
   });
-
+  
   const [showComponent, setShowComponent] = useState(true);
   const [time18, setTime18] = useState(false);
   const [time21, setTime21] = useState(false);

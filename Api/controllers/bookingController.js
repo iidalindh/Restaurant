@@ -30,6 +30,8 @@ const addNewBooking = async (req, res) => {
 
   const saveBooking = await newBooking.save();
 
+  console.log(saveBooking._id);
+
   await transport.sendMail(
     {
       from: process.env.React__App__TRANSPORT_MAIL,
@@ -40,7 +42,7 @@ const addNewBooking = async (req, res) => {
             <h3>Datum: ${date}</h3>
             <h3>Tid: ${time}</h3>
             <h3>Antal gäster: ${numberOfGuests}</h3>
-            <p>Klicka <a href = "http://localhost:8000/">här</a> för att avboka din bordsreservation</p>`,
+            <p>Klicka <a href = "http://localhost:3000/booking/cancel/${saveBooking._id}">här</a> för att avboka din bordsreservation</p>`,
     },
     function (err, info) {
       if (err) {
@@ -64,7 +66,7 @@ const getBookings = async (req, res) => {
   }
 
   if (date < Date.now()) {
-    return res.status(400).json({
+    return res.status(204).json({
       message: "Något blev fel. Säkerställ att alla fält är ifyllda korrekt",
     });
   }
@@ -105,11 +107,10 @@ const getBookings = async (req, res) => {
         responseArray.push({ availableTables: true, time: 18 });
       } else {
         return res
-          .status(400)
+          .status(204)
           .json({ message: "Antal gäster i din bokning är för stor" });
       }
     }
-
     if (time21.length > 0) {
       let availableTables = 15;
 
@@ -161,4 +162,34 @@ const getBookings = async (req, res) => {
 
   return res.json(responseArray);
 };
-module.exports = { addNewBooking, getBookings };
+
+const cancelBooking = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+
+  const booking = await Booking.find({ _id: id });
+  console.log(booking[0].customerEmail);
+  await transport.sendMail(
+    {
+      from: process.env.React__App__TRANSPORT_MAIL,
+      to: booking[0].customerEmail,
+      subject: "Athena - Avbokning",
+
+      html: `<h1>Du har nu avbokat din bordsreservation för nedanstående datum och tid.</h1>
+              <h3>Datum: ${booking[0].date}</h3>
+              <h3>Tid: ${booking[0].time}</h3>
+              <h3>Antal gäster: ${booking[0].numberOfGuests}</h3>`,
+    },
+    function (err, info) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Message sent: " + info.response);
+      }
+    }
+  );
+
+  await Booking.deleteOne({ _id: id });
+};
+
+module.exports = { addNewBooking, getBookings, cancelBooking };

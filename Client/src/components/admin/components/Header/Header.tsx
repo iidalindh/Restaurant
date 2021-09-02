@@ -9,8 +9,6 @@ import {MyTypography} from "../Wrappers/Wrappers";
 // context
 import {useLayoutDispatch, useLayoutState,} from "../../context/LayoutContext";
 import {toggleSidebar,} from "../../context/LayoutReducers";
-import {useUserDispatch} from "../../context/UserContext";
-import {signOut} from "../../context/UserReducers";
 import {RouteComponentProps} from "react-router-dom";
 import styled from "styled-components";
 
@@ -23,8 +21,6 @@ const Header: React.FC<HeaderProps> = (props) => {
     // global
     const layoutState = useLayoutState();
     const layoutDispatch = useLayoutDispatch();
-    const userDispatch = useUserDispatch();
-
     // local
     const [profileMenu, setProfileMenu] = useState(null);
 
@@ -71,14 +67,14 @@ const Header: React.FC<HeaderProps> = (props) => {
                             Site Address
                         </MyTypography>
                     </ProfileMenu>
-                    <div>
-                        <MyTypography
-                            color="primary"
-                            onClick={() => signOut(userDispatch, props.history)}
-                        >
-                            Sign Out
-                        </MyTypography>
-                    </div>
+                    {/*<div>*/}
+                    {/*    <MyTypography*/}
+                    {/*        color="primary"*/}
+                    {/*        onClick={() => signOut(userDispatch, props.history)}*/}
+                    {/*    >*/}
+                    {/*        Sign Out*/}
+                    {/*    </MyTypography>*/}
+                    {/*</div>*/}
                 </Menu>
             </ToolbarStyled>
         </AppBarStyled>

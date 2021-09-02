@@ -7,7 +7,7 @@ import classNames from "classnames";
 import EventSeatIcon from '@material-ui/icons/EventSeat';
 // styles
 // components
-import SidebarLink from "./components/SidebarLink/SidebarLink";
+import SidebarLink from "./components/SidebarLink";
 
 // context
 import {useLayoutDispatch, useLayoutState,} from "../../context/LayoutContext";

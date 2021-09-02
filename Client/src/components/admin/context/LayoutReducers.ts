@@ -51,14 +51,6 @@ const checkForDefine = (state: any, payload: any, key: string, defaultVal?: any)
     else return payload[key];
 };
 
-export const setLayoutContextData = (dispatch: Dispatch<LayoutAction>, data: InitialNullableStateType) => {
-    dispatch({
-        type: Types.SET_DATA,
-        payload: data
-    })
-};
-
-
 export function toggleSidebar(dispatch: Dispatch<LayoutAction>) {
     dispatch({
         type: Types.TOGGLE_SIDEBAR,

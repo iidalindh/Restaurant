@@ -1,9 +1,8 @@
 import React from "react";
-import {Redirect, Route, RouteComponentProps, Switch, withRouter,} from "react-router-dom";
+import {Redirect, Route, RouteComponentProps, withRouter,} from "react-router-dom";
 
 //icons
 // styles
-
 // components
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
@@ -35,13 +34,11 @@ const AdminLayout: React.FC<LayoutProps> = (props) => {
                     style={{width: layoutState.isSidebarOpened ? `calc(100vw - ${240 + 48}px)` : "calc(100vw - 240px)"}}
                 >
                     <FakeToolbar/>
-                    <Switch>
-                        <Route path="/admin/bookings/:id" component={BookingEdit}/>
-                        <Route path="/admin/bookings" component={Bookings}/>
-                        <Route path="/admin/admins/:id" component={AdminEdit}/>
-                        <Route path="/admin/admins" component={Admins}/>
-                        <Route render={() => <Redirect to={"/admin/bookings"}/>}/>
-                    </Switch>
+                    <Route path="/admin/bookings/:id" component={BookingEdit}/>
+                    <Route path="/admin/bookings" component={Bookings}/>
+                    <Route path="/admin/admins/:id" component={AdminEdit}/>
+                    <Route path="/admin/admins" component={Admins}/>
+                    <Route render={() => <Redirect to={"/admin/bookings"}/>}/>
                 </Content>
             </>
         </Root>

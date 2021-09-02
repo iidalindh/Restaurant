@@ -5,8 +5,8 @@ const addNewBooking = async (req, res) => {
     const { date, time, numberOfGuests, customerName, customerEmail } = req.body;
 
     console.log(req.body);
-    if (!date || !time || !numberOfGuests || !customerName || !customerEmail) {
-        return res.status(404).json({ message: "fyll i alla fälten" });
+    if (date === '' || time === 0|| numberOfGuests === 0 || customerName === ''|| customerEmail === '') {
+        return res.status(200).json({ message: "Fyll i alla fälten" });
     }
 
   const newBooking = new Booking({
@@ -18,6 +18,7 @@ const addNewBooking = async (req, res) => {
   });
 
   const saveBooking = await newBooking.save();
+  return res.status(200).json({ message: 'Bokningen lyckades'});
 
 };
 
@@ -29,11 +30,11 @@ const getBookings = async (req, res) => {
     const { numberOfGuests, date } = req.body;
 
     if (numberOfGuests === 0) {
-        return res.status(204).json({ message: "Fyll i antal gäster" });
+        return res.status(200).json({ message: "Fyll i antal gäster" });
     }
 
     if (date < Date.now()) {
-        return res.status(204).json({
+        return res.status(200).json({
             message: "Något blev fel. Säkerställ att alla fält är ifyllda korrekt",
         });
     }
@@ -73,7 +74,7 @@ const getBookings = async (req, res) => {
             if(numberOfGuests < 90) {
                 responseArray.push({ availableTables: true, time: 18 });
             } else {
-                return res.status(204).json({message: 'Antal gäster i din bokning är för stor'});
+                return res.status(200).json({message: 'Antal gäster i din bokning är för stor'});
             }
         }
 
@@ -96,7 +97,7 @@ const getBookings = async (req, res) => {
             if(numberOfGuests < 90) {
                 responseArray.push({ availableTables: true, time: 21 });
             } else {
-                return res.status(204).json({message: 'Antal gäster i din bokning är för stor'});
+                return res.status(200).json({message: 'Antal gäster i din bokning är för stor'});
             }
         }
     }

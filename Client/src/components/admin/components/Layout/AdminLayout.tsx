@@ -12,9 +12,9 @@ import Sidebar from "../Sidebar/Sidebar";
 import {useLayoutState} from "../../context/LayoutContext";
 import styled from "styled-components";
 import Admins from "../../pages/admins/Admins";
-import Bookings from "../../pages/tables/bookings";
+import Customers from "../../pages/customers/customers";
 import AdminEdit from "../../pages/admins/AdminEdit";
-import BookingEdit from "../../pages/tables/bookingEdit";
+import CustomerEdit from "../../pages/customers/customerEdit";
 
 interface LayoutProps extends RouteComponentProps {
 
@@ -34,11 +34,12 @@ const AdminLayout: React.FC<LayoutProps> = (props) => {
                     style={{width: layoutState.isSidebarOpened ? `calc(100vw - ${240 + 48}px)` : "calc(100vw - 240px)"}}
                 >
                     <FakeToolbar/>
-                    <Route path="/admin/bookings/:id" component={BookingEdit}/>
-                    <Route path="/admin/bookings" component={Bookings}/>
+
+                    <Route path="/admin/customers/:id" component={CustomerEdit}/>
+                    <Route exact  path="/admin/customers" component={Customers}/>
                     <Route path="/admin/admins/:id" component={AdminEdit}/>
-                    <Route path="/admin/admins" component={Admins}/>
-                    <Route render={() => <Redirect to={"/admin/bookings"}/>}/>
+                    <Route exact path="/admin/admins" component={Admins}/>
+                    <Route render={() => <Redirect to={"/admin/customers"}/>}/>
                 </Content>
             </>
         </Root>

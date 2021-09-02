@@ -17,7 +17,7 @@ interface TablesProps extends RouteComponentProps {
 
 
 
-const Bookings: React.FC<TablesProps> = (props) => {
+const Customers: React.FC<TablesProps> = (props) => {
 
     const [bookingsTransformed, setBookingsTransformed] = useState<any[][]>([])
     const [bookings, setBookings] = useState<Booking[]>([])
@@ -30,7 +30,7 @@ const Bookings: React.FC<TablesProps> = (props) => {
     }
 
     function handleEdit(item: Booking) {
-        props.history.push(`/admin/bookings/${item._id}`)
+        props.history.push(`/admin/customers/${item._id}`)
     }
 
     const transformData = (data: Booking[]) => {
@@ -54,7 +54,7 @@ const Bookings: React.FC<TablesProps> = (props) => {
     useEffect(updateData, [date])
 
     const handleReserveTable = () => {
-        props.history.push(`/admin/bookings/create`)
+        props.history.push(`/admin/customers/create`)
     }
 
     return (
@@ -103,4 +103,4 @@ const columns = [{
 }]
 
 
-export default Bookings;
+export default Customers;

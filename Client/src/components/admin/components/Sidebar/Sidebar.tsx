@@ -16,7 +16,7 @@ import styled from "styled-components";
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 const structure = [
-    {id: 0, label: "Bookings", link: "/admin/bookings", icon: <EventSeatIcon/>},
+    {id: 0, label: "Customers", link: "/admin/customers", icon: <EventSeatIcon/>},
     {id: 1, label: "Admins", link: "/admin/admins", icon: <SupervisorAccountIcon/>},
 ];
 

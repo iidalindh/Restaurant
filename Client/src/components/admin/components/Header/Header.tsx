@@ -1,15 +1,14 @@
 import React, {useState} from "react";
-import {AppBar, IconButton, Menu, Toolbar} from "@material-ui/core";
-import {ArrowBack as ArrowBackIcon, Menu as MenuIcon, Person as AccountIcon,} from "@material-ui/icons";
+import {AppBar, ButtonBase, IconButton, Toolbar} from "@material-ui/core";
+import {ArrowBack as ArrowBackIcon, Menu as MenuIcon,} from "@material-ui/icons";
 
 // styles
 // components
-import {MyTypography} from "../Wrappers/Wrappers";
-
+import {MyTypography} from "../Wrappers/MyTypography";
+import {Link, RouteComponentProps} from 'react-router-dom'
 // context
 import {useLayoutDispatch, useLayoutState,} from "../../context/LayoutContext";
 import {toggleSidebar,} from "../../context/LayoutReducers";
-import {RouteComponentProps} from "react-router-dom";
 import styled from "styled-components";
 
 interface HeaderProps extends RouteComponentProps {
@@ -41,41 +40,7 @@ const Header: React.FC<HeaderProps> = (props) => {
                     Restaurant Admin Panel
                 </TitleHeader>
                 <div style={{flexGrow: 1}}/>
-                <IconButton
-                    aria-haspopup="true"
-                    color="inherit"
-                    aria-controls="profile-menu"
-                    onClick={(e: any) => setProfileMenu(e.currentTarget)}
-                >
-                    <AccountIcon/>
-                </IconButton>
-                <Menu
-                    id="profile-menu"
-                    open={Boolean(profileMenu)}
-                    anchorEl={profileMenu}
-                    onClose={() => setProfileMenu(null)}
-                    disableAutoFocusItem
-                >
-                    <ProfileMenu>
-                        <MyTypography variant="h4" weight="medium">
-                            Arash Raji
-                        </MyTypography>
-                        <MyTypography
-                            // className={classes.profileMenuLink}
-                            color="primary"
-                        >
-                            Site Address
-                        </MyTypography>
-                    </ProfileMenu>
-                    {/*<div>*/}
-                    {/*    <MyTypography*/}
-                    {/*        color="primary"*/}
-                    {/*        onClick={() => signOut(userDispatch, props.history)}*/}
-                    {/*    >*/}
-                    {/*        Sign Out*/}
-                    {/*    </MyTypography>*/}
-                    {/*</div>*/}
-                </Menu>
+                <ButtonBase><Link style={{color : "unset"}} to={"/"}>Main Page</Link></ButtonBase>
             </ToolbarStyled>
         </AppBarStyled>
     );
@@ -96,7 +61,7 @@ const AppBarStyled = styled(AppBar)`
   width: 100vw;
   z-index: 100000 !important;
   transition: margin 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
-  
+
 `
 
 const ToolbarStyled = styled(Toolbar)`
@@ -134,12 +99,5 @@ const TitleHeader = styled(MyTypography)`
   white-space: nowrap;
   margin-right: 20px;
 `
-
-const ProfileMenu = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem
-`
-
 
 export default Header;

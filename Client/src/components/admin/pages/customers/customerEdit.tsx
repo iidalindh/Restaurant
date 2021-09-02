@@ -8,7 +8,7 @@ import BookingService from "../../service/bookingService";
 import Calendar from "react-calendar";
 import moment from "moment";
 
-const BookingEdit: React.FC<RouteComponentProps> = (props) => {
+const CustomerEdit: React.FC<RouteComponentProps> = (props) => {
 
     // @ts-ignore
     const {id} = useParams();
@@ -39,7 +39,7 @@ const BookingEdit: React.FC<RouteComponentProps> = (props) => {
         // else if (booking.password !== booking.confirmPassword)
         //     return toast.warn("Passwords are not similar")
         BookingService.saveBooking(booking).then(res => {
-            props.history.push("/admin/bookings")
+            props.history.push("/admin/customers")
         }).catch(err => toast.error(err.response ? err.response.data.message : err.message))
     }
 
@@ -86,4 +86,4 @@ const Container = styled.form`
   }
 `
 
-export default BookingEdit;
+export default CustomerEdit;

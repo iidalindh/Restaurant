@@ -3,10 +3,7 @@ import axios from "axios";
 const myAxios = () => axios
     .create({
         baseURL: "http://localhost:8000",
-        headers: {
-            'x-auth-token': localStorage.getItem("id_token")
-        },
-        withCredentials : true
+        withCredentials: true
     })
 
 

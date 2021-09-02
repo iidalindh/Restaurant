@@ -1,7 +1,7 @@
 import React from "react";
 
 // components
-import {MyTypography} from "../Wrappers/Wrappers";
+import {MyTypography} from "../Wrappers/MyTypography";
 import styled from "styled-components";
 
 interface PageTitleProps {

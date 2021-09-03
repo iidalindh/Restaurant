@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-interface IBookingDetailsProps {
+export interface IBookingDetailsProps {
   date: string;
   time: number;
   numberOfGuests: number;

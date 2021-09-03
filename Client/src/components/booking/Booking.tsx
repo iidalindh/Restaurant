@@ -122,7 +122,7 @@ export const Booking = () => {
       ) : (
         <BookingSite>
           {showBookingDetails ? (
-            <div>
+            <Div>
               <BookingGuests
                 numberOfGuests={guests}
                 pickGuestAmount={selectNumberGuests}
@@ -151,9 +151,9 @@ export const Booking = () => {
               ) : (
                 <Button disabled={true}>GÅ VIDARE</Button>
               )}
-            </div>
+            </Div>
           ) : (
-            <div>
+            <Div>
               <BookingDetails
                 date={date}
                 time={time}
@@ -163,6 +163,13 @@ export const Booking = () => {
                 formChange={customerDetails}
                 checked={details.checked}
               ></BookingDetails>
+                 {msg !== "" ? (
+            <ErrorMessageContainer>
+              <p>{msg}</p>
+            </ErrorMessageContainer>
+          ) : (
+            <></>
+          )}
               {details.checked ? (
                 <Button type="button" onClick={onSubmit}>
                   BOKA NU
@@ -172,14 +179,7 @@ export const Booking = () => {
                   BOKA NU
                 </Button>
               )}
-            </div>
-          )}
-          {msg !== "" ? (
-            <ErrorMessageContainer>
-              <p>{msg}</p>
-            </ErrorMessageContainer>
-          ) : (
-            <></>
+            </Div>
           )}
         </BookingSite>
       )}
@@ -195,7 +195,7 @@ const BookingSite = styled.section`
 `;
 
 const Button = styled.button`
-  width: 100%;
+  width: 500px;
   background-color: blue;
   color: white;
   padding: 10px;
@@ -217,10 +217,20 @@ const Button = styled.button`
   }
 `;
 
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
 const ErrorMessageContainer = styled.div`
   border: 1px solid blue;
   border-radius: 1%;
-  width: 80%;
+  display: flex;
+  width: 70%;
+  align-items: center;
+  justify-content: center;
   p {
     text-align: center;
   }

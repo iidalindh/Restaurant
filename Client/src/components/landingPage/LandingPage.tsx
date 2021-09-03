@@ -65,10 +65,11 @@ const ImgDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 400px;
 
   img {
     width: 100%;
-    height: 80%;
+    height: 100%;
     padding-bottom: 2rem;
   }
 

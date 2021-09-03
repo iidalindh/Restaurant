@@ -17,8 +17,20 @@ const addNewBooking = async (req, res) => {
   const { date, time, numberOfGuests, customerName, customerEmail } = req.body;
 
     console.log(req.body);
-    if (date === '' || time === 0|| numberOfGuests === 0 || customerName === ''|| customerEmail === '') {
+
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    emailValidation = re.test(String(customerEmail).toLowerCase());
+    console.log(emailValidation);
+
+    if(emailValidation === false) {
+      return res.status(200).json({message : 'Fyll i en giltig emailadress'});
+    }
+    if (date === '' || time === 0|| numberOfGuests === 0 || customerName === '') {
         return res.status(200).json({ message: "Fyll i alla fälten" });
+    }
+
+    if(customerName.length < 3) {
+      return res.status(200).json({ message: 'Namnet är för kort'});
     }
 
 

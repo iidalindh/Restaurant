@@ -10,6 +10,7 @@ import { BookingDetails } from "./components/booking/BookingDetails";
 
 import axios from "axios";
 import { AuthContext } from "./context/AuthContext";
+import { CancelBooking } from "./components/booking/CancelBooking";
 
 axios.defaults.withCredentials = true;
 
@@ -40,18 +41,11 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
-
+          <Route path="/booking/cancel/:id">
+            <CancelBooking />
+          </Route>
           <Route path="/booking">
             <Booking />
-          </Route>
-          <Route path="/booking-details">
-            {/* <BookingDetails
-            date={bookingValue.date}
-            time={bookingValue.time}
-            numberOfGuests={bookingValue.numberOfGuests}
-            customerEmail={bookingValue.customerEmail}
-            customerName={bookingValue.customerName}
-          /> */}
           </Route>
 
           {role === "admin" ? (

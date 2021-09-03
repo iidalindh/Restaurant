@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-interface IBookingDetailsProps {
+export interface IBookingDetailsProps {
   date: string;
   time: number;
   numberOfGuests: number;
@@ -55,6 +55,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
           <MainHeader>KONTAKTUPPGIFTER</MainHeader>
           <Form>
             <Input
+              data-testid="FÖRNAMN"
               type="text"
               placeholder="FÖRNAMN"
               id="firstName"

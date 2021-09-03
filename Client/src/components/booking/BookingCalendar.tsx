@@ -60,9 +60,9 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
   }
 
   return (
-    <div>
+    <div data-testid="calendar">
       <MediaQuery minDeviceWidth={1224}>
-        <Calendar
+        <Calendar 
           onChange={runFunctions}
           value={dateValue}
           minDate={new Date()}

@@ -8,6 +8,7 @@ import { BookingDetails } from "./BookingDetails";
 
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
+import { BookingConfirmed } from "./BookingConfirmed";
 
 export interface IBooking {
   numberOfGuests: number;
@@ -37,10 +38,13 @@ export const Booking = () => {
     checked: false,
   });
 
-  const [showComponent, setShowComponent] = useState(true);
+  const [showBookingDetails, setShowBookingDetails] = useState(true);
+  const [showBookingConfirmation, setShowBookingConfrimation] = useState(true);
   const [time18, setTime18] = useState(false);
   const [time21, setTime21] = useState(false);
   const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [loadingDone, setLoadingDone] = useState(false);
 
   function updateTime(bookingTime: number) {
     setTime(bookingTime);
@@ -91,9 +95,15 @@ export const Booking = () => {
       checked: details.checked,
     };
 
+    setLoading(true);
     const res = await axios.post("http://localhost:8000/booking", dataToSend);
+    setLoading(false);
+
+    if (loading === false) {
+      console.log("jag e false nu bror");
+      setLoadingDone(true);
+    }
     setMsg(res.data.message);
-    
   }
 
   useEffect(() => {
@@ -103,63 +113,76 @@ export const Booking = () => {
   return (
     <>
       <Navbar />
-      <BookingSite>
-        {showComponent ? (
-          <Div>
-            <BookingGuests
-              numberOfGuests={guests}
-              pickGuestAmount={selectNumberGuests}
-            ></BookingGuests>
-            <BookingCalendar
-              date={date}
-              pickDate={datePicker}
-              button18={buttonState18}
-              button21={buttonState21}
-              numberOfGuests={guests}
-            ></BookingCalendar>
-            <BookingTime
-              time={time}
-              addTime={updateTime}
-              time18={time18}
-              time21={time21}
-            ></BookingTime>
-            {guests && time && date ? (
-              <Button
-                onClick={() => {
-                  setShowComponent(false);
-                }}
-              >
-                GÅ VIDARE
-              </Button>
-            ) : (
-              <Button disabled={true}>GÅ VIDARE</Button>
-            )}
-          </Div>
-        ) : (
-          <Div>
-            <BookingDetails
-              date={date}
-              time={time}
-              numberOfGuests={guests}
-              customerEmail={details.customerName}
-              customerName={details.customerEmail}
-              formChange={customerDetails}
-              checked={details.checked}
-            ></BookingDetails>
-            {msg !== '' ? <ErrorMessageContainer><p>{msg}</p></ErrorMessageContainer> : <></> }
-            {details.checked ? (
-              <Button type="button" onClick={onSubmit}>
-                BOKA NU
-              </Button>
-            ) : (
-              <Button type="button" disabled={true}>
-                BOKA NU
-              </Button>
-            )}
-          </Div>
-        )}
-        
-      </BookingSite>
+      {showBookingConfirmation === true && loadingDone === true ? (
+        <BookingConfirmed
+          date={date}
+          time={time}
+          numberOfGuests={guests}
+        ></BookingConfirmed>
+      ) : (
+        <BookingSite>
+          {showBookingDetails ? (
+            <Div>
+              <BookingGuests
+                numberOfGuests={guests}
+                pickGuestAmount={selectNumberGuests}
+              ></BookingGuests>
+              <BookingCalendar
+                date={date}
+                pickDate={datePicker}
+                button18={buttonState18}
+                button21={buttonState21}
+                numberOfGuests={guests}
+              ></BookingCalendar>
+              <BookingTime
+                time={time}
+                addTime={updateTime}
+                time18={time18}
+                time21={time21}
+              ></BookingTime>
+              {guests && time && date ? (
+                <Button
+                  onClick={() => {
+                    setShowBookingDetails(false);
+                  }}
+                >
+                  GÅ VIDARE
+                </Button>
+              ) : (
+                <Button disabled={true}>GÅ VIDARE</Button>
+              )}
+            </Div>
+          ) : (
+            <Div>
+              <BookingDetails
+                date={date}
+                time={time}
+                numberOfGuests={guests}
+                customerEmail={details.customerName}
+                customerName={details.customerEmail}
+                formChange={customerDetails}
+                checked={details.checked}
+              ></BookingDetails>
+                 {msg !== "" ? (
+            <ErrorMessageContainer>
+              <p>{msg}</p>
+            </ErrorMessageContainer>
+          ) : (
+            <></>
+          )}
+              {details.checked ? (
+                <Button type="button" onClick={onSubmit}>
+                  BOKA NU
+                </Button>
+              ) : (
+                <Button type="button" disabled={true}>
+                  BOKA NU
+                </Button>
+              )}
+            </Div>
+          )}
+        </BookingSite>
+      )}
     </>
   );
 };
@@ -201,7 +224,6 @@ const Div = styled.div`
   justify-content: center;
   width: 100%;
 `;
-
 const ErrorMessageContainer = styled.div`
   border: 1px solid blue;
   border-radius: 1%;

@@ -45,6 +45,7 @@ export const BookingGuests = (props: IBookingGuestsProps) => {
 
 const Div = styled.div`
   padding: 20px;
+  width: 40%;
 `;
 
 const ErrorMessage = styled.p`

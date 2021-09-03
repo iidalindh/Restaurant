@@ -59,7 +59,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
               placeholder="FÖRNAMN"
               id="firstName"
               required
-              onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setFirstName(e.target.value);
               }}
             ></Input>
@@ -68,7 +68,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
               placeholder="EFTERNAMN"
               id="lastName"
               required
-              onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setLastName(e.target.value);
               }}
             ></Input>
@@ -77,7 +77,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
               placeholder="MEJLADRESS"
               id="email"
               required
-              onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setEmail(e.target.value);
               }}
             ></Input>
@@ -146,7 +146,7 @@ const HR = styled.hr`
   //Desktop
   @media (min-width: 1025px) {
     width: 75%;
-    :first-child: {
+    :first-child {
       margin-top: 30px;
       padding: 0;
     }

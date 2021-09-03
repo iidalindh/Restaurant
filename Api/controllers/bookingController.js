@@ -29,6 +29,10 @@ const addNewBooking = async (req, res) => {
         return res.status(200).json({ message: "Fyll i alla fälten" });
     }
 
+    if(customerName.length < 3) {
+      return res.status(200).json({ message: 'Namnet är för kort'});
+    }
+
 
   const newBooking = new Booking({
     date,

@@ -73,11 +73,11 @@ const ButtonDiv = styled.div`
 `;
 
 const Button = styled.button`
-  width: 35%;
+  width: 150px;
   background-color: white;
   color: black;
   padding: 10px;
-  margin: 8px 0;
+  margin: 8px 15px;
   border: 1px solid #004cbf;
   border-radius: 50px;
   cursor: pointer;

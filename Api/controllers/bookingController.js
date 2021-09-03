@@ -3,7 +3,8 @@ const Booking = require("../models/Booking");
 const nodemailer = require("nodemailer");
 
 const transport = nodemailer.createTransport({
-  host: "smtp.zoho.eu",
+  service: "yahoo",
+  host: "smtp.mail.yahoo.com",
   port: 465,
   secure: true,
   auth: {

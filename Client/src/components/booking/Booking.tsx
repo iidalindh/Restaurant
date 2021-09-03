@@ -31,16 +31,16 @@ export const Booking = () => {
   const [time, setTime] = useState(0);
   const [date, setDate] = useState("");
   const [guests, setGuests] = useState(0);
-
   const [details, setDetails] = useState({
     customerName: "",
     customerEmail: "",
     checked: false,
   });
-  
+
   const [showComponent, setShowComponent] = useState(true);
   const [time18, setTime18] = useState(false);
   const [time21, setTime21] = useState(false);
+  const [msg, setMsg] = useState("");
 
 
   function updateTime(bookingTime: number) {
@@ -93,7 +93,8 @@ export const Booking = () => {
     };
 
     const res = await axios.post("http://localhost:8000/booking", dataToSend);
-    console.log(res);
+    setMsg(res.data.message);
+    
   }
 
 
@@ -151,6 +152,8 @@ export const Booking = () => {
             )}
           </div>
         )}
+        {msg !== '' ? <ErrorMessageContainer><p>{msg}</p></ErrorMessageContainer> : <></> }
+        
       </BookingSite>
     </>
   );
@@ -183,5 +186,15 @@ const Button = styled.button`
     :hover {
       cursor: not-allowed;
     }
+  }
+`;
+
+
+const ErrorMessageContainer = styled.div`
+  border: 1px solid blue;
+  border-radius: 1%;
+  width: 80%;
+  p {
+    text-align: center;
   }
 `;

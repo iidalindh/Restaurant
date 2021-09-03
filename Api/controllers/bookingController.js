@@ -15,10 +15,11 @@ const transport = nodemailer.createTransport({
 const addNewBooking = async (req, res) => {
   const { date, time, numberOfGuests, customerName, customerEmail } = req.body;
 
-  console.log(req.body);
-  if (!date || !time || !numberOfGuests || !customerName || !customerEmail) {
-    return res.status(404).json({ message: "fyll i alla fälten" });
-  }
+    console.log(req.body);
+    if (date === '' || time === 0|| numberOfGuests === 0 || customerName === ''|| customerEmail === '') {
+        return res.status(200).json({ message: "Fyll i alla fälten" });
+    }
+
 
   const newBooking = new Booking({
     date,
@@ -29,6 +30,7 @@ const addNewBooking = async (req, res) => {
   });
 
   const saveBooking = await newBooking.save();
+  return res.status(200).json({ message: 'Bokningen lyckades'});
 
   console.log(saveBooking._id);
 
@@ -55,40 +57,21 @@ const addNewBooking = async (req, res) => {
 };
 
 const getBookings = async (req, res) => {
-  let responseArray = [];
-  let time18 = [];
-  let time21 = [];
+    let responseArray = [];
+    let time18 = [];
+    let time21 = [];
 
-  const { numberOfGuests, date } = req.body;
+    const { numberOfGuests, date } = req.body;
 
-  if (numberOfGuests === 0) {
-    return res.status(204).json({ message: "Fyll i antal gäster" });
-  }
-
-  if (date < Date.now()) {
-    return res.status(204).json({
-      message: "Något blev fel. Säkerställ att alla fält är ifyllda korrekt",
-    });
-  }
-
-  const bookings = await Booking.find({ date: date });
-  if (!bookings) {
-    responseArray.push(
-      { availableTables: true, time: 18 } + { availableTables: true, time: 21 }
-    );
-  } else {
-    for (let i = 0; i < bookings.length; i++) {
-      if (bookings[i].time === 18) {
-        time18.push(bookings[i]);
-      }
-
-      if (bookings[i].time === 21) {
-        time21.push(bookings[i]);
-      }
+    if (numberOfGuests === 0) {
+        return res.status(200).json({ message: "Fyll i antal gäster" });
     }
 
-    if (time18.length > 0) {
-      let availableTables = 15;
+    if (date < Date.now()) {
+        return res.status(200).json({
+            message: "Något blev fel. Säkerställ att alla fält är ifyllda korrekt",
+        });
+    }
 
       for (let i = 0; i < time18.length; i++) {
         let tablesNeeded = Math.ceil(time18[i].numberOfGuests / 6);
@@ -130,7 +113,7 @@ const getBookings = async (req, res) => {
             if(numberOfGuests < 90) {
                 responseArray.push({ availableTables: true, time: 18 });
             } else {
-                return res.status(204).json({message: 'Antal gäster i din bokning är för stor'});
+                return res.status(200).json({message: 'Antal gäster i din bokning är för stor'});
             }
         }
 
@@ -153,7 +136,7 @@ const getBookings = async (req, res) => {
             if(numberOfGuests < 90) {
                 responseArray.push({ availableTables: true, time: 21 });
             } else {
-                return res.status(204).json({message: 'Antal gäster i din bokning är för stor'});
+                return res.status(200).json({message: 'Antal gäster i din bokning är för stor'});
             }
         }
       }

@@ -55,7 +55,6 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
           <MainHeader>KONTAKTUPPGIFTER</MainHeader>
           <Form>
             <Input
-              data-testid="FÖRNAMN"
               type="text"
               placeholder="FÖRNAMN"
               id="firstName"

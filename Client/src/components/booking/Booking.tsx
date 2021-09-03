@@ -37,11 +37,10 @@ export const Booking = () => {
     customerEmail: "",
     checked: false,
   });
-  
+
   const [showComponent, setShowComponent] = useState(true);
   const [time18, setTime18] = useState(false);
   const [time21, setTime21] = useState(false);
-
 
   function updateTime(bookingTime: number) {
     setTime(bookingTime);
@@ -73,14 +72,14 @@ export const Booking = () => {
     setDetails(customerDetails);
   }
 
-  function buttonState18(btn18 : boolean) {
+  function buttonState18(btn18: boolean) {
     setTime18(btn18);
   }
 
-  function buttonState21(btn21 : boolean) {
+  function buttonState21(btn21: boolean) {
     setTime21(btn21);
   }
-  async function onSubmit(e : React.MouseEvent<HTMLButtonElement>){
+  async function onSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
     const dataToSend: IBooking = {
@@ -96,12 +95,9 @@ export const Booking = () => {
     console.log(res);
   }
 
-
   useEffect(() => {
     console.log(time18);
-    
-  }, [time18])
-   
+  }, [time18]);
 
   return (
     <>
@@ -120,14 +116,23 @@ export const Booking = () => {
               button21={buttonState21}
               numberOfGuests={guests}
             ></BookingCalendar>
-            <BookingTime time={time} addTime={updateTime} time18={time18} time21={time21}></BookingTime>
-            <Button
-              onClick={() => {
-                setShowComponent(false);
-              }}
-            >
-              GÅ VIDARE
-            </Button>
+            <BookingTime
+              time={time}
+              addTime={updateTime}
+              time18={time18}
+              time21={time21}
+            ></BookingTime>
+            {guests && time && date ? (
+              <Button
+                onClick={() => {
+                  setShowComponent(false);
+                }}
+              >
+                GÅ VIDARE
+              </Button>
+            ) : (
+              <Button disabled={true}>GÅ VIDARE</Button>
+            )}
           </div>
         ) : (
           <div>

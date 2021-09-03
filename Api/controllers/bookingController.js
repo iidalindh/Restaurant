@@ -57,90 +57,83 @@ const addNewBooking = async (req, res) => {
 };
 
 const getBookings = async (req, res) => {
-    let responseArray = [];
-    let time18 = [];
-    let time21 = [];
+  let responseArray = [];
+  let time18 = [];
+  let time21 = [];
 
-    const { numberOfGuests, date } = req.body;
+  const { numberOfGuests, date } = req.body;
 
-    if (numberOfGuests === 0) {
-        return res.status(200).json({ message: "Fyll i antal gäster" });
-    }
+  if (numberOfGuests === 0) {
+      return res.status(200).json({ message: "Fyll i antal gäster" });
+  }
 
-    if (date < Date.now()) {
-        return res.status(200).json({
-            message: "Något blev fel. Säkerställ att alla fält är ifyllda korrekt",
-        });
-    }
+  if (date < Date.now()) {
+      return res.status(200).json({
+          message: "Något blev fel. Säkerställ att alla fält är ifyllda korrekt",
+      });
+  }
 
-      for (let i = 0; i < time18.length; i++) {
-        let tablesNeeded = Math.ceil(time18[i].numberOfGuests / 6);
-        availableTables = availableTables - tablesNeeded;
+  const bookings = await Booking.find({ date: date });
+  if (!bookings) {
+      responseArray.push(
+          { availableTables: true, time: 18 } + { availableTables: true, time: 21 }
+      );
+  } else {
+      for (let i = 0; i < bookings.length; i++) {
+          if (bookings[i].time === 18) {
+              time18.push(bookings[i]);
+          }
+
+          if (bookings[i].time === 21) {
+              time21.push(bookings[i]);
+          }
       }
 
-      let tablesRequired = Math.ceil(numberOfGuests / 6);
+      if (time18.length > 0) {
+          let availableTables = 15;
 
-      if (tablesRequired <= availableTables) {
-        responseArray.push({ availableTables: true, time: 18 });
+          for (let i = 0; i < time18.length; i++) {
+              let tablesNeeded = Math.ceil(time18[i].numberOfGuests / 6);
+              availableTables = availableTables - tablesNeeded;
+          }
+
+          let tablesRequired = Math.ceil(numberOfGuests / 6);
+
+          if (tablesRequired <= availableTables) {
+              responseArray.push({ availableTables: true, time: 18 });
+          } else {
+              responseArray.push({ availableTables: false, time: 18 });
+          }
       } else {
-        responseArray.push({ availableTables: false, time: 18 });
+          if(numberOfGuests < 90) {
+              responseArray.push({ availableTables: true, time: 18 });
+          } else {
+              return res.status(200).json({message: 'Antal gäster i din bokning är för stor'});
+          }
       }
-    } else {
-      if (numberOfGuests < 90) {
-        responseArray.push({ availableTables: true, time: 18 });
+
+      if (time21.length > 0) {
+          let availableTables = 15;
+
+          for (let i = 0; i < time21.length; i++) {
+              let tablesNeeded = Math.ceil(time21[i].numberOfGuests / 6);
+              availableTables = availableTables - tablesNeeded;
+          }
+
+          let tablesRequired = Math.ceil(numberOfGuests / 6);
+
+          if (tablesRequired <= availableTables) {
+              responseArray.push({ availableTables: true, time: 21 });
+          } else {
+              responseArray.push({ availableTables: false, time: 21 });
+          }
       } else {
-        return res
-          .status(204)
-          .json({ message: "Antal gäster i din bokning är för stor" });
+          if(numberOfGuests < 90) {
+              responseArray.push({ availableTables: true, time: 21 });
+          } else {
+              return res.status(200).json({message: 'Antal gäster i din bokning är för stor'});
+          }
       }
-    }
-    if (time21.length > 0) {
-      let availableTables = 15;
-
-      for (let i = 0; i < time21.length; i++) {
-        let tablesNeeded = Math.ceil(time21[i].numberOfGuests / 6);
-        availableTables = availableTables - tablesNeeded;
-      }
-
-      let tablesRequired = Math.ceil(numberOfGuests / 6);
-
-      if (tablesRequired <= availableTables) {
-        responseArray.push({ availableTables: true, time: 21 });
-      } else {
-        if (numberOfGuests < 90) {
-          responseArray.push({ availableTables: true, time: 18 });
-        } else {
-            if(numberOfGuests < 90) {
-                responseArray.push({ availableTables: true, time: 18 });
-            } else {
-                return res.status(200).json({message: 'Antal gäster i din bokning är för stor'});
-            }
-        }
-
-        if (time21.length > 0) {
-            let availableTables = 15;
-
-            for (let i = 0; i < time21.length; i++) {
-                let tablesNeeded = Math.ceil(time21[i].numberOfGuests / 6);
-                availableTables = availableTables - tablesNeeded;
-            }
-
-            let tablesRequired = Math.ceil(numberOfGuests / 6);
-
-            if (tablesRequired <= availableTables) {
-                responseArray.push({ availableTables: true, time: 21 });
-            } else {
-                responseArray.push({ availableTables: false, time: 21 });
-            }
-        } else {
-            if(numberOfGuests < 90) {
-                responseArray.push({ availableTables: true, time: 21 });
-            } else {
-                return res.status(200).json({message: 'Antal gäster i din bokning är för stor'});
-            }
-        }
-      }
-    }
   }
 
   return res.json(responseArray);

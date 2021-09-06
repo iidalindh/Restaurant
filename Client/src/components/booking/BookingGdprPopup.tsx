@@ -7,8 +7,6 @@ interface IBookingGdprPopupProps {
 }
 
 export const BookingGdprPopup = (props: IBookingGdprPopupProps) => {
-  console.log(props.trigger);
-
   return (
     <>
       {props.trigger ? (

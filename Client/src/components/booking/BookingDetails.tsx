@@ -31,6 +31,26 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
     props.formChange(customerData);
   }
 
+  function toggleCheckbox(e: React.MouseEvent<HTMLButtonElement>) {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let emailValidation = re.test(String(email).toLowerCase());
+
+    if (
+      firstName !== null &&
+      firstName !== "" &&
+      lastName !== null &&
+      lastName !== "" &&
+      emailValidation === true
+    ) {
+      console.log(emailValidation);
+      e.preventDefault();
+      {
+        checked ? setChecked(false) : setChecked(true);
+      }
+    }
+  }
+
   return (
     <>
       <BookingSection>
@@ -61,6 +81,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
               required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setFirstName(e.target.value);
+                setChecked(false);
               }}
             ></Input>
             <Input
@@ -70,26 +91,38 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
               required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setLastName(e.target.value);
+                setChecked(false);
               }}
             ></Input>
             <Input
               type="email"
               placeholder="MEJLADRESS"
               id="email"
+              pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
               required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setEmail(e.target.value);
+                setChecked(false);
               }}
             ></Input>
             <GDPRConfirmDiv>
-              <Input
-                type="checkbox"
-                id="confirmGDPR"
-                name="confirmGDPR"
-                onChange={() => {
-                  setChecked(!checked);
-                }}
-              ></Input>
+              {checked ? (
+                <button
+                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                    toggleCheckbox(e);
+                  }}
+                >
+                  <i className="far fa-check-square"></i>
+                </button>
+              ) : (
+                <button
+                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                    toggleCheckbox(e);
+                  }}
+                >
+                  <i className="far fa-square"></i>
+                </button>
+              )}
               <label htmlFor="confirmGDPR"> Jag accepterar villkoren</label>
             </GDPRConfirmDiv>
           </Form>

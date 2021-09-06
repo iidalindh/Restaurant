@@ -98,11 +98,15 @@ export const Booking = () => {
     setLoading(true);
     const res = await axios.post("http://localhost:8000/booking", dataToSend);
     setLoading(false);
+    console.log(res.data);
 
-    if (loading === false) {
-      console.log("jag e false nu bror");
-      setLoadingDone(true);
+    if (res.data.message === "Bokningen lyckades") {
+      if (loading === false) {
+        console.log("jag e false nu bror");
+        setLoadingDone(true);
+      }
     }
+
     setMsg(res.data.message);
   }
 
@@ -163,13 +167,13 @@ export const Booking = () => {
                 formChange={customerDetails}
                 checked={details.checked}
               ></BookingDetails>
-                 {msg !== "" ? (
-            <ErrorMessageContainer>
-              <p>{msg}</p>
-            </ErrorMessageContainer>
-          ) : (
-            <></>
-          )}
+              {msg !== "" ? (
+                <ErrorMessageContainer>
+                  <p>{msg}</p>
+                </ErrorMessageContainer>
+              ) : (
+                <></>
+              )}
               {details.checked ? (
                 <Button type="button" onClick={onSubmit}>
                   BOKA NU

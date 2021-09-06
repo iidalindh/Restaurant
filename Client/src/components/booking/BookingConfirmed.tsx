@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactLoading from "react-loading";
+import MediaQuery from "react-responsive";
 import styled from "styled-components";
 
 interface IBookingConfirmedProps {
@@ -16,16 +17,32 @@ export const BookingConfirmed = (props: IBookingConfirmedProps) => {
   }, 2000);
 
   return (
-    <div>
+    <Section>
       {!done ? (
         <LoadingDiv>
-          <ReactLoading type={"spin"} color={"pink"} height={100} width={200} />
+          <MediaQuery minDeviceWidth={1224}>
+            <ReactLoading
+              type={"spin"}
+              color={"blue"}
+              height={200}
+              width={200}
+            />
+          </MediaQuery>
+          <MediaQuery maxDeviceWidth={1224}>
+            <ReactLoading
+              type={"spin"}
+              color={"blue"}
+              height={100}
+              width={100}
+            />
+          </MediaQuery>
         </LoadingDiv>
       ) : (
         <ConfirmationDiv>
+          <GreenCheck className="fas fa-check-circle"></GreenCheck>
           <h2>Tack för din bokning!</h2>
           <div>
-            <p>Du har bokat följande på Athena Restaurang</p>
+            <p>Du har bokat följande på Restaurang Athena</p>
             <p>
               <b>Datum: </b> {props.date}
             </p>
@@ -44,16 +61,27 @@ export const BookingConfirmed = (props: IBookingConfirmedProps) => {
           </CenterDiv>
         </ConfirmationDiv>
       )}
-    </div>
+    </Section>
   );
 };
 
-const LoadingDiv = styled.div`
+const Section = styled.section`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 50vh;
+  height: 60vh;
+
+  //Desktop
+  @media (min-width: 1025px) {
+    height: 80vh;
+  }
+`;
+
+const LoadingDiv = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 const ConfirmationDiv = styled.div`
@@ -62,6 +90,14 @@ const ConfirmationDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
+
+  //Desktop
+  @media (min-width: 1025px) {
+    width: 40vw;
+    padding: 20px;
+    border: 1px solid black;
+    align-self: center;
+  }
 `;
 
 const CenterDiv = styled.div`
@@ -78,4 +114,9 @@ const CenterDiv = styled.div`
   p {
     margin: 0;
   }
+`;
+
+const GreenCheck = styled.i`
+  font-size: 4rem;
+  color: green;
 `;

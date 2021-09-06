@@ -2,6 +2,8 @@ import React from "react";
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { Footer } from "../footer/Footer";
+
 export const LandingPage = () => {
   const history = useHistory();
 
@@ -36,6 +38,7 @@ export const LandingPage = () => {
           </GoToMenuDiv>
         </ViewMenuDiv>
       </MainSection>
+      <Footer />
     </>
   );
 };
@@ -102,7 +105,7 @@ const ViewMenuDiv = styled.div`
   justify-content: center;
   align-items: center;
   background-color: beige;
-  width: 100vw;
+  width: 100%;
 
   img {
     padding: 2rem;

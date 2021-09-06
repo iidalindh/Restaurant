@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import type {FormEvent} from "react";
+import type { FormEvent } from "react";
 import { Navbar } from "../navbar/Navbar";
-
-
+import styled from "styled-components";
+import { Input, Button, Form, AuthContainer } from "../../styles";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,26 +25,32 @@ export const Login = () => {
   }
   return (
     <>
-    <Navbar />
-    <div className="login-container">
-      <h1>Logga in</h1>
-      <form onSubmit={login}>
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e : React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-          value={email}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e : React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-          value={password}
-        />
+      <Navbar />
+      <AuthContainer>
+        <h1>Logga in</h1>
+        <Form onSubmit={login}>
+          <Input
+            type="email"
+            placeholder="Email"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
+            value={email}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
+            value={password}
+          />
 
-        <button type="submit">Logga in</button>
-      </form>
-    </div>
+          <Button type="submit">Logga in</Button>
+        </Form>
+      </AuthContainer>
     </>
   );
 };
+
+

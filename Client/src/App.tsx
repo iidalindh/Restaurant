@@ -48,14 +48,9 @@ function App() {
             <Booking />
           </Route>
 
-          {role === "admin" ? (
-            <Route path="/admin"></Route>
-          ) : (
-            <>
-              <p>You don't have access to this page</p>
-              <Link to="/">Go to homepage</Link>
-            </>
-          )}
+          <Route path="/admin">
+            {role === 'admin' ? <> admin</> : <Login /> }
+          </Route>
         </Switch>
       </Router>
     </AuthContext.Provider>

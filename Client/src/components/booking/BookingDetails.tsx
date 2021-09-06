@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import {Input} from "../../styles";
 
 export interface IBookingDetailsProps {
   date: string;
@@ -99,12 +100,6 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
   );
 };
 
-const Input = styled.input`
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  border-color: blue;
-`;
 
 const Form = styled.form`
   display: flex;

@@ -1,4 +1,4 @@
-export default interface Booking {
+export default interface IBooking {
     _id?: string,
     date: string
     time: number

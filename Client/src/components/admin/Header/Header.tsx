@@ -7,8 +7,8 @@ import {ArrowBack as ArrowBackIcon, Menu as MenuIcon,} from "@material-ui/icons"
 import {MyTypography} from "../Wrappers/MyTypography";
 import {Link, RouteComponentProps} from 'react-router-dom'
 // context
-import {useLayoutDispatch, useLayoutState,} from "../../context/LayoutContext";
-import {toggleSidebar,} from "../../context/LayoutReducers";
+import {useLayoutDispatch, useLayoutState,} from "../../../context/LayoutContext";
+import {toggleSidebar,} from "../../../context/LayoutReducers";
 import styled from "styled-components";
 
 interface HeaderProps extends RouteComponentProps {

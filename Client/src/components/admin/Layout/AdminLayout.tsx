@@ -9,12 +9,12 @@ import Sidebar from "../Sidebar/Sidebar";
 
 
 // context
-import {useLayoutState} from "../../context/LayoutContext";
+import {useLayoutState} from "../../../context/LayoutContext";
 import styled from "styled-components";
-import Admins from "../../pages/admins/Admins";
-import Customers from "../../pages/customers/customers";
-import AdminEdit from "../../pages/admins/AdminEdit";
-import CustomerEdit from "../../pages/customers/customerEdit";
+import Admins from "../pages/admins/Admins";
+import Customers from "../pages/customers/customers";
+import AdminEdit from "../pages/admins/AdminEdit";
+import CustomerEdit from "../pages/customers/customerEdit";
 
 interface LayoutProps extends RouteComponentProps {
 

@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from "react";
-import {Drawer, IconButton, List} from "@material-ui/core";
-import {ArrowBack as ArrowBackIcon, FormatSize as TypographyIcon,} from "@material-ui/icons";
+import {Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
+import {ArrowBack as ArrowBackIcon,} from "@material-ui/icons";
 import {useTheme} from "@material-ui/styles";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Link, RouteComponentProps, withRouter} from "react-router-dom";
 import classNames from "classnames";
+import classnames from "classnames";
 import EventSeatIcon from '@material-ui/icons/EventSeat';
 // styles
 // components
-import SidebarLink from "./components/SidebarLink";
 
 // context
-import {useLayoutDispatch, useLayoutState,} from "../../context/LayoutContext";
-import {toggleSidebar} from "../../context/LayoutReducers";
+import {useLayoutDispatch, useLayoutState,} from "../../../context/LayoutContext";
+import {toggleSidebar} from "../../../context/LayoutReducers";
 import styled from "styled-components";
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import useStyles from "./styles";
 
 const structure = [
     {id: 0, label: "Customers", link: "/admin/customers", icon: <EventSeatIcon/>},
@@ -21,6 +22,66 @@ const structure = [
 ];
 
 interface SidebarProps extends RouteComponentProps {
+
+}
+
+interface SidebarLinkProps {
+    link?: string,
+    icon?: any,
+    label?: string,
+    location: any,
+    isSidebarOpened: boolean,
+}
+
+const SidebarLink: React.FC<SidebarLinkProps> = ({
+                                                     link,
+                                                     icon,
+                                                     label,
+                                                     location,
+                                                     isSidebarOpened,
+                                                 }) => {
+    const classes: any = useStyles();
+
+    // local
+    const isLinkActive =
+        link &&
+        (location.pathname === link || location.pathname.indexOf(link) !== -1);
+
+
+    return (
+        <ListItem
+            button
+            // @ts-ignore
+            component={link && Link}
+            to={link}
+            className={classes.link}
+            classes={{
+                root: classnames({
+                    "linkActive": isLinkActive,
+                }),
+            }}
+            disableRipple
+        >
+            <ListIcon
+                className={classnames({
+                    [classes.linkIconActive]: isLinkActive,
+                })}
+            >
+                {icon}
+            </ListIcon>
+            <ListItemText
+                classes={{
+                    primary: classnames(classes.linkText, {
+                        [classes.linkTextActive]: isLinkActive,
+                        [classes.linkTextHidden]: !isSidebarOpened,
+                    }),
+                }}
+                primary={label}
+            />
+        </ListItem>
+    );
+
+// ###########################################################
 
 }
 
@@ -110,6 +171,16 @@ const MobileBackButton = styled.div`
   @media only screen and (min-width: 960px) {
     display: none
   }
+`
+
+
+const ListIcon = styled(ListItemIcon)`
+  color: #6E6E6E99;
+  width: 24px;
+  display: flex;
+  transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  margin-right: 8px;
+  justify-content: center;
 `
 
 export default withRouter(Sidebar);

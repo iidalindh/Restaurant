@@ -3,8 +3,8 @@ import {Button, FormControlLabel, Radio, TextField} from "@material-ui/core";
 import {RouteComponentProps, useParams} from 'react-router-dom';
 import styled from "styled-components";
 import {toast} from "react-toastify";
-import Booking from "../../models/Booking";
-import BookingService from "../../service/bookingService";
+import IBooking from "../../../../context/IBooking";
+import BookingService from "../../../../service/bookingService";
 import Calendar from "react-calendar";
 import moment from "moment";
 
@@ -13,7 +13,7 @@ const CustomerEdit: React.FC<RouteComponentProps> = (props) => {
     // @ts-ignore
     const {id} = useParams();
 
-    const [booking, setBooking] = useState<Booking>({
+    const [booking, setBooking] = useState<IBooking>({
         time: 18,
         numberOfGuests: 6,
         customerName: "",

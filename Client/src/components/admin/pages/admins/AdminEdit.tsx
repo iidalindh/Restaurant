@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import User from "../../models/User";
 import {Button, TextField} from "@material-ui/core";
 import {RouteComponentProps, useParams} from 'react-router-dom';
-import AdminAuthService from "../../service/adminAuthService";
+import AdminAuthService from "../../../../service/adminAuthService";
 import styled from "styled-components";
 import {toast} from "react-toastify";
+import IUser from "../../../../context/AuthContext";
 
-interface EditUser extends User {
+interface EditUser extends IUser {
     confirmPassword?: ""
 }
 
@@ -46,7 +46,8 @@ const AdminEdit: React.FC<RouteComponentProps> = (props) => {
     return (
         <Container onSubmit={handleSubmit}>
             <TextField autoComplete={"off"} name={"email"} onChange={handleChange} value={admin.email} label={"Email"}/>
-            <TextField autoComplete={"off"} name={"password"} type={"password"} onChange={handleChange} value={admin.password}
+            <TextField autoComplete={"off"} name={"password"} type={"password"} onChange={handleChange}
+                       value={admin.password}
                        label={"Password"}/>
             <TextField name={"confirmPassword"} type={"password"} onChange={handleChange} value={admin.confirmPassword}
                        label={"Confirm Password"}/>

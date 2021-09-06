@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import PageTitle from "../../components/PageTitle/PageTitle";
-import Booking from "../../models/Booking";
+import PageTitle from "../../PageTitle/PageTitle";
+import IBooking from "../../../../context/IBooking";
 import {Button} from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
 import {RouteComponentProps} from "react-router-dom";
 // @ts-ignore
 import {toast} from "react-toastify";
-import BookingService from "../../service/bookingService";
+import BookingService from "../../../../service/bookingService";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import moment from "moment";
@@ -20,20 +20,20 @@ interface TablesProps extends RouteComponentProps {
 const Customers: React.FC<TablesProps> = (props) => {
 
     const [bookingsTransformed, setBookingsTransformed] = useState<any[][]>([])
-    const [bookings, setBookings] = useState<Booking[]>([])
+    const [bookings, setBookings] = useState<IBooking[]>([])
     const [date, setDate] = useState(new Date())
 
-    const handleDelete = (item: Booking) => {
+    const handleDelete = (item: IBooking) => {
         BookingService.cancelBooking(item._id || "").then(res => {
             updateData()
         }).catch(err => toast.error(err.response ? err.response.data.message : err.message))
     }
 
-    function handleEdit(item: Booking) {
+    function handleEdit(item: IBooking) {
         props.history.push(`/admin/customers/${item._id}`)
     }
 
-    const transformData = (data: Booking[]) => {
+    const transformData = (data: IBooking[]) => {
         return data.map(item => ([item.customerName, item.numberOfGuests, item.time,
             <Button color={"primary"} onClick={() => handleEdit(item)} variant={"outlined"}>Edit</Button>,
             <Button color={"secondary"} onClick={() => handleDelete(item)} variant={"outlined"}>Cancel</Button>]))

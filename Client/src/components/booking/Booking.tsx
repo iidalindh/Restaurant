@@ -5,7 +5,7 @@ import { BookingGuests } from "./BookingGuests";
 import { BookingCalendar } from "./BookingCalendar";
 import { BookingTime } from "./BookingTime";
 import { BookingDetails } from "./BookingDetails";
-
+import {Button} from '../../styles';
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 import { BookingConfirmed } from "./BookingConfirmed";
@@ -194,28 +194,7 @@ const BookingSite = styled.section`
   align-items: center;
 `;
 
-const Button = styled.button`
-  width: 500px;
-  background-color: blue;
-  color: white;
-  padding: 10px;
-  margin: 20px 0;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 1.3em;
 
-  &hover {
-    background-color: #213fea;
-  }
-
-  :disabled {
-    background-color: #d4d4d4;
-    :hover {
-      cursor: not-allowed;
-    }
-  }
-`;
 
 const Div = styled.div`
   display: flex;

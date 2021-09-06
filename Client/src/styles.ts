@@ -13,12 +13,12 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-width: 150px;
+width: 55%;
 background-color: white;
 color: black;
 padding: 10px;
 margin: 8px 15px;
-border: 1px solid #004cbf;
+border: 1px solid ${colorScheme.main};
 border-radius: 50px;
 cursor: pointer;
 font-size: 1.5em;

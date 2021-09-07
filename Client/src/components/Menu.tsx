@@ -25,7 +25,12 @@ const ImgDiv = styled.div`
   align-items: center;
 
   img {
-    height: 90vh;
+    height: 90%;
     margin-bottom: 2rem;
+    width: 375px;
+
+    @media screen and (min-width: 1224px) {
+        width: auto;
+    }
   }
 `;

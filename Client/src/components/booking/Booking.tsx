@@ -5,7 +5,7 @@ import { BookingGuests } from "./BookingGuests";
 import { BookingCalendar } from "./BookingCalendar";
 import { BookingTime } from "./BookingTime";
 import { BookingDetails } from "./BookingDetails";
-import {Button} from '../../styles';
+import { Button } from "../../styles";
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 import { BookingConfirmed } from "./BookingConfirmed";
@@ -96,11 +96,12 @@ export const Booking = () => {
     setLoading(false);
     console.log(res.data);
     if (res.data.message === "Bokningen lyckades") {
-    if (loading === false) {
-      setLoadingDone(true);
-    }
+      if (loading === false) {
+        setLoadingDone(true);
+      }
 
-    setMsg(res.data.message);
+      setMsg(res.data.message);
+    }
   }
   return (
     <>
@@ -185,8 +186,6 @@ const BookingSite = styled.section`
   justify-content: center;
   align-items: center;
 `;
-
-
 
 const Div = styled.div`
   display: flex;

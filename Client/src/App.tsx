@@ -5,7 +5,6 @@ import { Login } from "./components/login/Login";
 import { Register } from "./components/register/Register";
 import { LandingPage } from "./components/landingPage/LandingPage";
 import { Menu } from "./components/Menu";
-
 import { Booking } from "./components/booking/Booking";
 import { BookingDetails } from "./components/booking/BookingDetails";
 

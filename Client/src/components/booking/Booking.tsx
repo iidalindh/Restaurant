@@ -5,7 +5,7 @@ import { BookingGuests } from "./BookingGuests";
 import { BookingCalendar } from "./BookingCalendar";
 import { BookingTime } from "./BookingTime";
 import { BookingDetails } from "./BookingDetails";
-
+import {Button} from '../../styles';
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 import { BookingConfirmed } from "./BookingConfirmed";
@@ -50,18 +50,14 @@ export const Booking = () => {
 
   function updateTime(bookingTime: number) {
     setTime(bookingTime);
-    console.log("Körs");
-    console.log(bookingTime);
   }
 
   function datePicker(bookingDate: string) {
     setDate(bookingDate);
-    console.log(bookingDate);
   }
 
   function selectNumberGuests(bookingGuests: number) {
     setGuests(bookingGuests);
-    console.log("antal gäster" + bookingGuests);
   }
 
   function customerDetails(bookingDetails: ICustomer) {
@@ -99,21 +95,13 @@ export const Booking = () => {
     const res = await axios.post("http://localhost:8000/booking", dataToSend);
     setLoading(false);
     console.log(res.data);
-
     if (res.data.message === "Bokningen lyckades") {
-      if (loading === false) {
-        console.log("jag e false nu bror");
-        setLoadingDone(true);
-      }
+    if (loading === false) {
+      setLoadingDone(true);
     }
 
     setMsg(res.data.message);
   }
-
-  useEffect(() => {
-    console.log(time18);
-  }, [time18]);
-
   return (
     <>
       <Navbar />
@@ -198,28 +186,7 @@ const BookingSite = styled.section`
   align-items: center;
 `;
 
-const Button = styled.button`
-  width: 500px;
-  background-color: blue;
-  color: white;
-  padding: 10px;
-  margin: 20px 0;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 1.3em;
 
-  &hover {
-    background-color: #213fea;
-  }
-
-  :disabled {
-    background-color: #d4d4d4;
-    :hover {
-      cursor: not-allowed;
-    }
-  }
-`;
 
 const Div = styled.div`
   display: flex;

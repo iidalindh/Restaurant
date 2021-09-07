@@ -2,6 +2,8 @@ import React from "react";
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { Footer } from "../footer/Footer";
+
 export const LandingPage = () => {
   const history = useHistory();
 
@@ -37,7 +39,9 @@ export const LandingPage = () => {
             <Button onClick={goToMenu}>MENY</Button>
           </GoToMenuDiv>
         </ViewMenuDiv>
+        
       </MainSection>
+      <Footer />
     </>
   );
 };
@@ -67,11 +71,10 @@ const ImgDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 400px;
 
   img {
     width: 100%;
-    height: 100%;
+    height: 400px;
     padding-bottom: 2rem;
   }
 
@@ -104,7 +107,7 @@ const ViewMenuDiv = styled.div`
   justify-content: center;
   align-items: center;
   background-color: beige;
-  width: 100vw;
+  width: 100%;
 
   img {
     padding: 2rem;

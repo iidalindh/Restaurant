@@ -22,6 +22,8 @@ export const Navbar = () => {
                 <MenuLink href="/booking">Boka bord</MenuLink>
                 <MenuLink href="/menu">Meny</MenuLink>
                 <MenuLink href="/admin">Admin</MenuLink>
+                <MenuLink href="/login">Login</MenuLink>
+                <MenuLink href="/register">Sign up</MenuLink>
             </Menu>
         </Nav>
     )

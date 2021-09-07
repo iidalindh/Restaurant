@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import styled from "styled-components";
-import { Option } from "react-select/src/filters";
-interface IBookingGuestsProps {
-  numberOfGuests: number;
-  pickGuestAmount(guests: number): void;
-}
+import {IBookingGuestsProps} from '../models/interface';
 
 export const BookingGuests = (props: IBookingGuestsProps) => {
   const options = [

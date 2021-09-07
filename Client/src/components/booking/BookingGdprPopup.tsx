@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-interface IBookingGdprPopupProps {
-  children: React.ReactNode;
-  trigger: boolean;
-}
+import { IBookingGdprPopupProps } from "../models/interface";
 
 export const BookingGdprPopup = (props: IBookingGdprPopupProps) => {
   return (

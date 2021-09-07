@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import {Button} from '../../styles';
-
-interface IBookingTimeProps {
-  time: number;
-  addTime(time: number): void;
-  time18: boolean;
-  time21: boolean;
-}
+import {IBookingTimeProps} from '../models/interface';
 
 export const BookingTime = (props: IBookingTimeProps) => {
   return (

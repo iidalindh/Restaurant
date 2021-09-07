@@ -2,23 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BookingGdprPopup } from "./BookingGdprPopup";
 import {Input} from "../../styles";
+import {IBookingDetailsProps, ICustomer} from '../models/interface';
 
-export interface IBookingDetailsProps {
-  date: string;
-  time: number;
-  numberOfGuests: number;
-  customerName: string;
-  customerEmail: string;
-  checked: boolean;
-  formChange(details: ICustomer): void;
-}
-
-export interface ICustomer {
-  firstName: string;
-  lastName: string;
-  email: string;
-  checked: boolean;
-}
 
 export const BookingDetails = (props: IBookingDetailsProps) => {
   const [firstName, setFirstName] = useState("");

@@ -9,17 +9,8 @@ import { Button } from "../../styles";
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 import { BookingConfirmed } from "./BookingConfirmed";
-import { SlowBuffer } from "buffer";
-import { ICustomer } from "./BookingDetails";
-
-export interface IBooking {
-  numberOfGuests: number;
-  date: string;
-  time: number;
-  customerName: string;
-  customerEmail: string;
-  checked: boolean;
-}
+import { ICustomer } from "../models/interface";
+import { IBooking } from "../models/interface";
 
 export const Booking = () => {
   let defaultValue: IBooking = {

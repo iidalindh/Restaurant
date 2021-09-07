@@ -1,4 +1,5 @@
 import React from 'react'
+import { Footer } from './footer/Footer'
 import { Navbar } from './navbar/Navbar'
 
 export const Menu = () => {
@@ -6,6 +7,7 @@ export const Menu = () => {
         <>
             <Navbar />
            <p>Menu</p> 
+           <Footer/>
         </>
     )
 }

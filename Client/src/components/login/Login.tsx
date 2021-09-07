@@ -4,6 +4,7 @@ import type { FormEvent } from "react";
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 import { Input, Button, Form, AuthContainer } from "../../styles";
+import { Footer } from "../footer/Footer";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -49,6 +50,7 @@ export const Login = () => {
           <Button type="submit">Logga in</Button>
         </Form>
       </AuthContainer>
+      <Footer />
     </>
   );
 };

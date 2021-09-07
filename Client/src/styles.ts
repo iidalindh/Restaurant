@@ -40,7 +40,7 @@ font-size: 1.5em;
 `;
 
 export const AuthContainer = styled.div`
-  height: 100%;
+  height: 85vh;
   width: 100%;
   display: flex;
   flex-direction: column;

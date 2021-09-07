@@ -21,7 +21,7 @@ export const Footer = () => {
 const FooterContainer = styled.div`
     
     width: 100%;
-    height: 120px;
+    height: 110px;
     display: flex; 
     background: ${colorScheme.main};
     align-self: flex-end;

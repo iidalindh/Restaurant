@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import ReactLoading from "react-loading";
 import MediaQuery from "react-responsive";
 import styled from "styled-components";
-
-interface IBookingConfirmedProps {
-  date: string;
-  time: number;
-  numberOfGuests: number;
-}
+import { IBookingConfirmedProps } from "../models/interface";
 
 export const BookingConfirmed = (props: IBookingConfirmedProps) => {
   const [done, setDone] = useState(false);

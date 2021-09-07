@@ -1,17 +1,8 @@
 import axios from "axios";
-import React, { ReactEventHandler, useState } from "react";
+import React, { useState } from "react";
 import Calendar from "react-calendar";
-import { IBooking } from "./Booking";
 import MediaQuery from "react-responsive";
-import styled from "styled-components";
-
-interface IBookingCalendarProps {
-  date: string;
-  pickDate(date: string): void;
-  button18(btnState18: boolean): void;
-  button21(btnState21: boolean): void;
-  numberOfGuests: number;
-}
+import { IBookingCalendarProps } from "../models/interface";
 
 export const BookingCalendar = (props: IBookingCalendarProps) => {
   const [dateValue, setDateValue] = useState(new Date());

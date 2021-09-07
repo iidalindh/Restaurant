@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import {Button} from '../../styles';
 
 interface IBookingTimeProps {
   time: number;
@@ -72,33 +73,7 @@ const ButtonDiv = styled.div`
   }
 `;
 
-const Button = styled.button`
-  width: 150px;
-  background-color: white;
-  color: black;
-  padding: 10px;
-  margin: 8px 15px;
-  border: 1px solid #004cbf;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 1.5em;
 
-  :hover {
-    background-color: #213fea;
-  }
-
-  :focus {
-    background-color: #213fea;
-    color: white;
-  }
-
-  :disabled {
-    background-color: #d4d4d4;
-    :hover {
-      cursor: not-allowed;
-    }
-  }
-`;
 
 const ErrorMessage = styled.p`
   color: red;

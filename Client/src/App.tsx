@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { Login } from "./components/login/Login";
 import { Register } from "./components/register/Register";
 import { LandingPage } from "./components/landingPage/LandingPage";
+import { Menu } from "./components/Menu";
 
 import { Booking } from "./components/booking/Booking";
 import { BookingDetails } from "./components/booking/BookingDetails";
@@ -47,15 +48,13 @@ function App() {
           <Route path="/booking">
             <Booking />
           </Route>
+          <Route path="/menu">
+            <Menu />
+          </Route>
 
-          {role === "admin" ? (
-            <Route path="/admin"></Route>
-          ) : (
-            <>
-              <p>You don't have access to this page</p>
-              <Link to="/">Go to homepage</Link>
-            </>
-          )}
+          <Route path="/admin">
+            {role === "admin" ? <> admin</> : <Login />}
+          </Route>
         </Switch>
       </Router>
     </AuthContext.Provider>

@@ -23,7 +23,9 @@ export const LandingPage = () => {
       <MainSection>
         <BookNowDiv>
           <h1>SÖDERMALM</h1>
-          <Button onClick={goToBooking}>BOKA NU</Button>
+          <Button data-testid="book-now" onClick={goToBooking}>
+            BOKA NU
+          </Button>
         </BookNowDiv>
         <ImgDiv>
           <img src="/sandwich.jpg" alt="" />

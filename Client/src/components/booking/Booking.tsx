@@ -9,6 +9,8 @@ import {Button} from '../../styles';
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 import { BookingConfirmed } from "./BookingConfirmed";
+import { SlowBuffer } from "buffer";
+import { ICustomer } from "./BookingDetails";
 
 export interface IBooking {
   numberOfGuests: number;
@@ -58,7 +60,7 @@ export const Booking = () => {
     setGuests(bookingGuests);
   }
 
-  function customerDetails(bookingDetails: any) {
+  function customerDetails(bookingDetails: ICustomer) {
     let name: string = bookingDetails.firstName + " " + bookingDetails.lastName;
     let email: string = bookingDetails.email;
     let checked: boolean = bookingDetails.checked;
@@ -68,7 +70,6 @@ export const Booking = () => {
       customerEmail: email,
       checked: checked,
     };
-
     setDetails(customerDetails);
   }
 
@@ -81,7 +82,6 @@ export const Booking = () => {
   }
   async function onSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-
     const dataToSend: IBooking = {
       numberOfGuests: guests,
       date: date,
@@ -94,10 +94,12 @@ export const Booking = () => {
     setLoading(true);
     const res = await axios.post("http://localhost:8000/booking", dataToSend);
     setLoading(false);
-
+    console.log(res.data);
+    if (res.data.message === "Bokningen lyckades") {
     if (loading === false) {
       setLoadingDone(true);
     }
+
     setMsg(res.data.message);
   }
   return (
@@ -153,13 +155,13 @@ export const Booking = () => {
                 formChange={customerDetails}
                 checked={details.checked}
               ></BookingDetails>
-                 {msg !== "" ? (
-            <ErrorMessageContainer>
-              <p>{msg}</p>
-            </ErrorMessageContainer>
-          ) : (
-            <></>
-          )}
+              {msg !== "" ? (
+                <ErrorMessageContainer>
+                  <p>{msg}</p>
+                </ErrorMessageContainer>
+              ) : (
+                <></>
+              )}
               {details.checked ? (
                 <Button type="button" onClick={onSubmit}>
                   BOKA NU

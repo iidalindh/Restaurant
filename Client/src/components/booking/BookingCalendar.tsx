@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { ReactEventHandler, useState } from "react";
 import Calendar from "react-calendar";
 import { IBooking } from "./Booking";
 import MediaQuery from "react-responsive";
@@ -16,11 +16,11 @@ interface IBookingCalendarProps {
 export const BookingCalendar = (props: IBookingCalendarProps) => {
   const [dateValue, setDateValue] = useState(new Date());
 
-  function changeDate(e: any) {
+  function changeDate(e: Date) {
     setDateValue(e);
   }
 
-  function selectDate(e: any) {
+  function selectDate(e: Date) {
     props.pickDate(e.toLocaleDateString());
   }
 
@@ -52,7 +52,8 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
     }
   }
 
-  function runFunctions(e: any) {
+  function runFunctions(e: Date) {
+    console.log(e);
     changeDate(e);
     selectDate(e);
     getAvailableTables();
@@ -61,7 +62,7 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
   return (
     <div data-testid="calendar">
       <MediaQuery minDeviceWidth={1224}>
-        <Calendar 
+        <Calendar
           onChange={runFunctions}
           value={dateValue}
           minDate={new Date()}

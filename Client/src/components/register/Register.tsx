@@ -25,7 +25,6 @@ export const Register = () => {
         "http://localhost:8000/register",
         registerData
       );
-      console.log(response);
     } catch (err) {
       console.log(err);
     }

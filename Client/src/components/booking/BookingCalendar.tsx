@@ -34,7 +34,6 @@ export const BookingCalendar = (props: IBookingCalendarProps) => {
       "http://localhost:8000/booking/getAvailableTables",
       data
     );
-    console.log(res.data);
 
     for (let ida = 0; ida < res.data.length; ida++) {
       if (res.data[ida].time === 18) {

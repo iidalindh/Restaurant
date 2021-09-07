@@ -1,4 +1,3 @@
-const { response } = require("express");
 const Booking = require("../models/Booking");
 const nodemailer = require("nodemailer");
 
@@ -16,11 +15,9 @@ const transport = nodemailer.createTransport({
 const addNewBooking = async (req, res) => {
   const { date, time, numberOfGuests, customerName, customerEmail } = req.body;
 
-    console.log(req.body);
-
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     emailValidation = re.test(String(customerEmail).toLowerCase());
-    console.log(emailValidation);
+    
 
     if(emailValidation === false) {
       return res.status(200).json({message : 'Fyll i en giltig emailadress'});
@@ -43,10 +40,7 @@ const addNewBooking = async (req, res) => {
   });
 
   const saveBooking = await newBooking.save();
-  return res.status(200).json({ message: 'Bokningen lyckades'});
-
-  console.log(saveBooking._id);
-
+  
   await transport.sendMail(
     {
       from: process.env.React__App__TRANSPORT_MAIL,
@@ -61,9 +55,9 @@ const addNewBooking = async (req, res) => {
     },
     function (err, info) {
       if (err) {
-        console.log(err);
+        return res.json({message: 'Något gick fel'});
       } else {
-        console.log("Message sent: " + info.response);
+        return res.status(200).json({ message: 'Bokningen lyckades'});
       }
     }
   );
@@ -154,10 +148,9 @@ const getBookings = async (req, res) => {
 
 const cancelBooking = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
 
   const booking = await Booking.find({ _id: id });
-  console.log(booking[0].customerEmail);
+  
   await transport.sendMail(
     {
       from: process.env.React__App__TRANSPORT_MAIL,
@@ -171,9 +164,9 @@ const cancelBooking = async (req, res) => {
     },
     function (err, info) {
       if (err) {
-        console.log(err);
+        return res.json({message: 'Något gick fel'});
       } else {
-        console.log("Message sent: " + info.response);
+        res.json({message: 'Avbokningen lyckades'});
       }
     }
   );

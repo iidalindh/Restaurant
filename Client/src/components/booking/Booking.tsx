@@ -48,18 +48,14 @@ export const Booking = () => {
 
   function updateTime(bookingTime: number) {
     setTime(bookingTime);
-    console.log("Körs");
-    console.log(bookingTime);
   }
 
   function datePicker(bookingDate: string) {
     setDate(bookingDate);
-    console.log(bookingDate);
   }
 
   function selectNumberGuests(bookingGuests: number) {
     setGuests(bookingGuests);
-    console.log("antal gäster" + bookingGuests);
   }
 
   function customerDetails(bookingDetails: any) {
@@ -100,16 +96,10 @@ export const Booking = () => {
     setLoading(false);
 
     if (loading === false) {
-      console.log("jag e false nu bror");
       setLoadingDone(true);
     }
     setMsg(res.data.message);
   }
-
-  useEffect(() => {
-    console.log(time18);
-  }, [time18]);
-
   return (
     <>
       <Navbar />

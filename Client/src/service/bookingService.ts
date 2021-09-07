@@ -1,6 +1,6 @@
 import http from './httpService';
 import {AxiosResponse} from "axios";
-import IBooking from "../context/IBooking";
+import IBooking from "../models/IBooking";
 
 const adminBookingEndPoints = "/admin"
 

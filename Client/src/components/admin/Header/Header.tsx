@@ -8,7 +8,7 @@ import {MyTypography} from "../Wrappers/MyTypography";
 import {Link, RouteComponentProps} from 'react-router-dom'
 // context
 import {useLayoutDispatch, useLayoutState,} from "../../../context/LayoutContext";
-import {toggleSidebar,} from "../../../context/LayoutReducers";
+import {toggleSidebar,} from "../../../reducers/LayoutReducers";
 import styled from "styled-components";
 
 interface HeaderProps extends RouteComponentProps {

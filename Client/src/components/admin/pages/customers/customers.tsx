@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PageTitle from "../../PageTitle/PageTitle";
-import IBooking from "../../../../context/IBooking";
+import IBooking from "../../../../models/IBooking";
 import {Button} from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
 import {RouteComponentProps} from "react-router-dom";

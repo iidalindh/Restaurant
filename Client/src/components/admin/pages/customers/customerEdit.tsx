@@ -3,7 +3,7 @@ import {Button, FormControlLabel, Radio, TextField} from "@material-ui/core";
 import {RouteComponentProps, useParams} from 'react-router-dom';
 import styled from "styled-components";
 import {toast} from "react-toastify";
-import IBooking from "../../../../context/IBooking";
+import IBooking from "../../../../models/IBooking";
 import BookingService from "../../../../service/bookingService";
 import Calendar from "react-calendar";
 import moment from "moment";

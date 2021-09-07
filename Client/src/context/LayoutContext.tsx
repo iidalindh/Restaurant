@@ -1,5 +1,5 @@
 import React, {createContext, Dispatch, useContext, useReducer} from 'react';
-import {LayoutAction, layoutReducer} from './LayoutReducers';
+import {LayoutAction, layoutReducer} from '../reducers/LayoutReducers';
 
 export type InitialStateType = {
     isSidebarOpened: boolean

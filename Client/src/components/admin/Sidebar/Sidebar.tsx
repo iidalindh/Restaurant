@@ -11,7 +11,7 @@ import EventSeatIcon from '@material-ui/icons/EventSeat';
 
 // context
 import {useLayoutDispatch, useLayoutState,} from "../../../context/LayoutContext";
-import {toggleSidebar} from "../../../context/LayoutReducers";
+import {toggleSidebar} from "../../../reducers/LayoutReducers";
 import styled from "styled-components";
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import useStyles from "./styles";

@@ -8,16 +8,12 @@ type BookingParams = {
 
 export const CancelBooking = () => {
   const { id } = useParams<BookingParams>();
-  //   console.log(id);
 
   async function cancelReservation() {
-    console.log(id);
-
     const res = await axios.post(
       `http://localhost:8000/booking/cancel/${id}`,
       id
     );
-    console.log(res);
   }
   return (
     <div>

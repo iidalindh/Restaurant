@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const colorScheme = {
     main: "#004CBF"
-
 }
 
 export const Input = styled.input`

@@ -9,6 +9,8 @@ import { BookingDetails } from "./BookingDetails";
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 import { BookingConfirmed } from "./BookingConfirmed";
+import { SlowBuffer } from "buffer";
+import { ICustomer } from "./BookingDetails";
 
 export interface IBooking {
   numberOfGuests: number;
@@ -62,7 +64,7 @@ export const Booking = () => {
     console.log("antal gäster" + bookingGuests);
   }
 
-  function customerDetails(bookingDetails: any) {
+  function customerDetails(bookingDetails: ICustomer) {
     let name: string = bookingDetails.firstName + " " + bookingDetails.lastName;
     let email: string = bookingDetails.email;
     let checked: boolean = bookingDetails.checked;
@@ -72,7 +74,6 @@ export const Booking = () => {
       customerEmail: email,
       checked: checked,
     };
-
     setDetails(customerDetails);
   }
 
@@ -85,7 +86,6 @@ export const Booking = () => {
   }
   async function onSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-
     const dataToSend: IBooking = {
       numberOfGuests: guests,
       date: date,

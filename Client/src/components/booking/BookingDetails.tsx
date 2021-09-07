@@ -9,7 +9,14 @@ export interface IBookingDetailsProps {
   customerName: string;
   customerEmail: string;
   checked: boolean;
-  formChange(details: object): void;
+  formChange(details: ICustomer): void;
+}
+
+export interface ICustomer {
+  firstName: string;
+  lastName: string;
+  email: string;
+  checked: boolean;
 }
 
 export const BookingDetails = (props: IBookingDetailsProps) => {
@@ -24,7 +31,7 @@ export const BookingDetails = (props: IBookingDetailsProps) => {
   }, [checked]);
 
   function formSubmit() {
-    const customerData = {
+    const customerData: ICustomer = {
       firstName: firstName,
       lastName: lastName,
       email: email,

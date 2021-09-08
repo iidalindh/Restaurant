@@ -3,6 +3,8 @@ import Select from "react-select";
 import styled from "styled-components";
 import {IBookingGuestsProps} from '../models/interface';
 
+
+
 export const BookingGuests = (props: IBookingGuestsProps) => {
   const options = [
     { value: 1, label: 1 },

@@ -39,6 +39,7 @@ module.exports.loginAdmin = async (req, res) => {
                 role: "admin"
             },
             process.env.PRIVATE_KEY
+            
         );
 
         res.send({token, ...existingUser._doc, passwordHash: undefined});

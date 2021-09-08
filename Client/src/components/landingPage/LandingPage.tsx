@@ -18,7 +18,7 @@ export const LandingPage = () => {
   };
 
   return (
-    <>
+    <div className="landingPage">
       <Navbar />
       <MainSection>
         <BookNowDiv>
@@ -42,7 +42,8 @@ export const LandingPage = () => {
         
       </MainSection>
       <Footer />
-    </>
+    </div>
+
   );
 };
 

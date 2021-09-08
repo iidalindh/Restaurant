@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export const Login = () => {
-  const {getLoggedIn} = useContext(AuthContext);
+  const { getLoggedIn } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -24,7 +24,7 @@ export const Login = () => {
 
       await axios.post("http://localhost:8000/login", loginData);
       getLoggedIn();
-      history.push('/');
+      history.push("/");
     } catch (err) {
       console.log(err);
     }
@@ -59,5 +59,3 @@ export const Login = () => {
     </>
   );
 };
-
-

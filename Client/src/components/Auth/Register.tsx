@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import type { FormEvent } from "react";
 import { Navbar } from "../navbar/Navbar";
 import { Button, Input, Form, AuthContainer } from "../../styles";
-import styled from "styled-components";
 import { Footer } from "../footer/Footer";
+import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export const Register = () => {
+  const {getLoggedIn} = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVerify, setPasswordVerify] = useState("");
 
+  const history = useHistory();
+
   async function register(e: FormEvent) {
+    console.log('loggar');
+    
     e.preventDefault();
+
+    console.log(email);
+    
 
     try {
       const registerData = {
@@ -21,10 +30,14 @@ export const Register = () => {
         passwordVerify,
       };
 
-      const response = await axios.post(
+      await axios.post(
         "http://localhost:8000/register",
         registerData
       );
+      getLoggedIn();
+      history.push('/');
+      
+      
     } catch (err) {
       console.log(err);
     }

@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import type { FormEvent } from "react";
 import { Navbar } from "../navbar/Navbar";
-import styled from "styled-components";
 import { Input, Button, Form, AuthContainer } from "../../styles";
 import { Footer } from "../footer/Footer";
+import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export const Login = () => {
+  const {getLoggedIn} = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   async function login(e: FormEvent) {
     e.preventDefault();
@@ -20,6 +23,8 @@ export const Login = () => {
       };
 
       await axios.post("http://localhost:8000/login", loginData);
+      getLoggedIn();
+      history.push('/');
     } catch (err) {
       console.log(err);
     }

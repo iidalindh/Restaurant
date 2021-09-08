@@ -1,0 +1,32 @@
+.drawerOpen {
+    width: 240px;
+    transition: width 0.6s ease;
+}
+
+.drawerClose {
+    overflow-x: hidden;
+    width: 96px;
+    transition: width 0.6s ease;
+}
+
+.linkTextHidden {
+    opacity: 0;
+}
+
+.linkActive {
+    background-color: #fafafa !important;
+}
+
+
+.linkNested {
+    padding-left: 0;
+
+}
+
+.linkNested:hover, .linkNested:hover {
+    background-color: #fff;
+}
+
+.linkIconActive {
+    color: #536DFE !important;
+}

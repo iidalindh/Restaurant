@@ -10,6 +10,7 @@ import { BookingDetails } from "./components/booking/BookingDetails";
 
 import axios from "axios";
 import { AuthContext } from "./context/AuthContext";
+import { Admin } from './components/admin/Admin';
 import { CancelBooking } from "./components/booking/CancelBooking";
 
 axios.defaults.withCredentials = true;
@@ -51,9 +52,18 @@ function App() {
             <Menu />
           </Route>
 
-          <Route path="/admin">
-            {role === "admin" ? <> admin</> : <Login />}
-          </Route>
+
+          {role === "admin" ? (
+                        <Route path="/admin" component={Admin}/>
+                    ) : (
+                        <>
+                            <p>You don't have access to this page</p>
+                            <Link to="/">Go to homepage</Link>
+                        </>
+                        
+
+                    )}
+
         </Switch>
       </Router>
     </AuthContext.Provider>

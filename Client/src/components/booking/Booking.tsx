@@ -8,9 +8,11 @@ import { BookingDetails } from "./BookingDetails";
 import { Button } from "../../styles";
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
+
 import { BookingConfirmed } from "./BookingConfirmed";
 import { ICustomer } from "../models/interface";
 import { IBooking } from "../models/interface";
+
 
 export const Booking = () => {
   let defaultValue: IBooking = {

@@ -40,7 +40,6 @@ const registerSubmit = async (req, res) => {
             user: savedUser._id,
         }, process.env.PRIVATE_KEY);
 
-        console.log(token);
 
         res.cookie("token", token, {httpOnly: true}).send();
 
@@ -64,16 +63,11 @@ const loginSubmit = async (req, res) => {
             return res.status(400).json({message: 'Inget konto med mailadressen hittades'});
         }
 
-        console.log(existingUser);
 
         const passwordCorrect = bcrypt.compare(password, existingUser.passwordHash);
 
         if (!passwordCorrect) {
             return res.status(401).json({message: "Wrong email or password"});
-        }
-
-        if (passwordCorrect) {
-            console.log('password match');
         }
         const token = await jwt.sign(
             {
@@ -99,10 +93,9 @@ const getLoggedInUser = async (req, res) => {
         const userId = jwt.verify(token, process.env.PRIVATE_KEY);
 
         const user = await User.findById(userId.user);
-        console.log(user);
+
 
         if (user.role === "admin") {
-            console.log("användaren är admin")
             return res.json({loggedIn: true, role: `${user.role}`})
         } else {
             res.send({loggedIn: true, role: `${user.role}`});

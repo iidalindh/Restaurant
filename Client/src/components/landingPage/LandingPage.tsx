@@ -2,6 +2,8 @@ import React from "react";
 import { Navbar } from "../navbar/Navbar";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { Footer } from "../footer/Footer";
+
 export const LandingPage = () => {
   const history = useHistory();
 
@@ -21,7 +23,9 @@ export const LandingPage = () => {
       <MainSection>
         <BookNowDiv>
           <h1>SÖDERMALM</h1>
-          <Button onClick={goToBooking}>BOKA NU</Button>
+          <Button data-testid="book-now" onClick={goToBooking}>
+            BOKA NU
+          </Button>
         </BookNowDiv>
         <ImgDiv>
           <img src="/sandwich.jpg" alt="" />
@@ -35,8 +39,11 @@ export const LandingPage = () => {
             <Button onClick={goToMenu}>MENY</Button>
           </GoToMenuDiv>
         </ViewMenuDiv>
+        
       </MainSection>
+      <Footer />
     </div>
+
   );
 };
 
@@ -68,7 +75,7 @@ const ImgDiv = styled.div`
 
   img {
     width: 100%;
-    height: 80%;
+    height: 400px;
     padding-bottom: 2rem;
   }
 
@@ -101,7 +108,7 @@ const ViewMenuDiv = styled.div`
   justify-content: center;
   align-items: center;
   background-color: beige;
-  width: 100vw;
+  width: 100%;
 
   img {
     padding: 2rem;

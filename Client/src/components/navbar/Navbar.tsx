@@ -10,7 +10,6 @@ interface IMenuProps {
 
 export const Navbar = () => {
   const { loggedIn, role } = useContext(AuthContext);
-
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Nav>
@@ -23,6 +22,7 @@ export const Navbar = () => {
       <Menu isOpen={isOpen}>
         <MenuLink href="/booking">Boka bord</MenuLink>
         <MenuLink href="/menu">Meny</MenuLink>
+        <MenuLink href="/contact">Kontakta oss</MenuLink>
 
         {!loggedIn && (
           <>
@@ -36,6 +36,7 @@ export const Navbar = () => {
     </Nav>
   );
 };
+
 
 const Nav = styled.div`
   background: ${colorScheme.main};
@@ -71,16 +72,18 @@ const Logo = styled.a`
 `;
 
 const Menu = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
 
-  @media (max-width: 768px) {
-    overflow: hidden;
-    flex-direction: column;
-    width: 100%;
-    max-height: ${(props: IMenuProps) => (props.isOpen ? "300px" : "0px")};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    @media (max-width: 768px) {
+        overflow: hidden;
+        flex-direction: column;
+        width: 100%;
+        max-height: ${(props : IMenuProps) => (props.isOpen ? "400px" : "0px")};
+    }
   }
 `;
 

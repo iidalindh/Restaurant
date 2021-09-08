@@ -11,6 +11,7 @@ import { BookingDetails } from "./components/booking/BookingDetails";
 import axios from "axios";
 import { AuthContext } from "./context/AuthContext";
 import { CancelBooking } from "./components/booking/CancelBooking";
+import { Contact } from "./components/Contact";
 
 axios.defaults.withCredentials = true;
 
@@ -49,6 +50,9 @@ function App() {
           </Route>
           <Route path="/menu">
             <Menu />
+          </Route>
+          <Route path="/contact">
+            <Contact />
           </Route>
 
           <Route path="/admin">

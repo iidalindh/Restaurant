@@ -21,6 +21,7 @@ export const Navbar = () => {
             <Menu isOpen={isOpen}>
                 <MenuLink href="/booking">Boka bord</MenuLink>
                 <MenuLink href="/menu">Meny</MenuLink>
+                <MenuLink href="/contact">Kontakta oss</MenuLink>
                 <MenuLink href="/admin">Admin</MenuLink>
                 <MenuLink href="/login">Login</MenuLink>
                 <MenuLink href="/register">Sign up</MenuLink>
@@ -72,7 +73,7 @@ const Menu = styled.div`
         overflow: hidden;
         flex-direction: column;
         width: 100%;
-        max-height: ${(props : IMenuProps) => (props.isOpen ? "300px" : "0px")};
+        max-height: ${(props : IMenuProps) => (props.isOpen ? "400px" : "0px")};
     }
 
 `;

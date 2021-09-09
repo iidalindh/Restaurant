@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
 import { BookingGuests } from "./BookingGuests";
@@ -13,17 +13,7 @@ import { BookingConfirmed } from "./BookingConfirmed";
 import { ICustomer } from "../models/interface";
 import { IBooking } from "../models/interface";
 
-
 export const Booking = () => {
-  let defaultValue: IBooking = {
-    numberOfGuests: 0,
-    date: "2018-02-12",
-    time: 18,
-    customerName: "",
-    customerEmail: "",
-    checked: false,
-  };
-
   const [time, setTime] = useState(0);
   const [date, setDate] = useState("");
   const [guests, setGuests] = useState(0);
@@ -34,7 +24,6 @@ export const Booking = () => {
   });
 
   const [showBookingDetails, setShowBookingDetails] = useState(true);
-  const [showBookingConfirmation, setShowBookingConfrimation] = useState(true);
   const [time18, setTime18] = useState(false);
   const [time21, setTime21] = useState(false);
   const [msg, setMsg] = useState("");
@@ -96,6 +85,8 @@ export const Booking = () => {
       setMsg(res.data.message);
     }
   }
+  let showBookingConfirmation: boolean = true;
+
   return (
     <>
       <Navbar />

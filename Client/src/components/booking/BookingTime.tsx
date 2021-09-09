@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import {Button} from '../../styles';
-import {IBookingTimeProps} from '../models/interface';
+import { Button } from "../../styles";
+import { IBookingTimeProps } from "../models/interface";
 
 export const BookingTime = (props: IBookingTimeProps) => {
   return (
@@ -66,8 +66,6 @@ const ButtonDiv = styled.div`
     margin-bottom: 20px;
   }
 `;
-
-
 
 const ErrorMessage = styled.p`
   color: red;

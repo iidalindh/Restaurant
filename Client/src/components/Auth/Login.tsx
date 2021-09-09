@@ -52,7 +52,9 @@ export const Login = () => {
             value={password}
           />
 
-          <Button type="submit">Logga in</Button>
+          <Button type="submit" data-testid="login">
+            Logga in
+          </Button>
         </Form>
       </AuthContainer>
       <Footer />

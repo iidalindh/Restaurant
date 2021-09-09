@@ -12,6 +12,13 @@ jest.mock("react-router-dom", () => ({
   }),
 }));
 
+test("should show Landingpage", () => {
+  render(<LandingPage />);
+  let heading = screen.getByText(/Södermalm/i);
+  expect(heading).toBeInTheDocument();
+});
+
+
 describe("Go to bookinpage when button click", () => {
   it("Redirects to booking page, when Book Now button on landingpage is clicked", () => {
     render(

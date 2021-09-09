@@ -37,7 +37,6 @@ export const Navbar = () => {
   );
 };
 
-
 const Nav = styled.div`
   background: ${colorScheme.main};
   padding: 0 2rem;
@@ -82,7 +81,7 @@ const Menu = styled.div`
         overflow: hidden;
         flex-direction: column;
         width: 100%;
-        max-height: ${(props : IMenuProps) => (props.isOpen ? "400px" : "0px")};
+        max-height: ${(props: IMenuProps) => (props.isOpen ? "400px" : "0px")};
     }
 `;
 

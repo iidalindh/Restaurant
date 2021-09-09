@@ -83,7 +83,6 @@ const Menu = styled.div`
         width: 100%;
         max-height: ${(props: IMenuProps) => (props.isOpen ? "400px" : "0px")};
     }
-  }
 `;
 
 export const MenuLink = styled.a`
